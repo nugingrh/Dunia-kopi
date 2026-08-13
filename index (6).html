@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1B120C">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Atlas Kopi">
+<title>Atlas Kopi — Nusantara & Dunia</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root{
+  --bg:#1B120C;
+  --bg-alt:#221610;
+  --panel:#2C1D14;
+  --panel-hi:#39271B;
+  --line:rgba(242,232,213,0.12);
+  --cream:#F3E9D7;
+  --cream-dim:#C7B49C;
+  --gold:#C9A15B;
+  --gold-hi:#E4C27E;
+  --rust:#9A5133;
+  --olive:#89916A;
+  --shadow: 0 14px 34px rgba(0,0,0,0.45);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(201,161,91,0.10), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(154,81,51,0.10), transparent 55%),
+    var(--bg);
+  color:var(--cream);
+  font-family:'Inter',sans-serif;
+  line-height:1.55;
+}
+h1,h2,h3,.display{font-family:'Fraunces',serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:inherit;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+/* ---- HERO ---- */
+header.hero{
+  padding:86px 0 54px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+  overflow:hidden;
+}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:12px;
+  color:var(--gold-hi);
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold-hi);display:inline-block;}
+.hero h1{
+  font-size:clamp(40px,6vw,76px);
+  font-weight:700;
+  line-height:0.98;
+  margin:18px 0 20px;
+  max-width:820px;
+}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--gold-hi);}
+.hero p.lede{
+  max-width:560px;
+  color:var(--cream-dim);
+  font-size:17px;
+}
+.hero-drip{
+  position:absolute; right:-40px; top:20px; width:340px; height:340px; opacity:.5;
+  pointer-events:none;
+}
+.hero-stats{display:flex; flex-wrap:wrap; gap:30px; margin-top:32px;}
+.hero-stats .stat{display:flex; flex-direction:column; gap:2px;}
+.hero-stats .stat b{font-family:'Fraunces',serif; font-size:32px; color:var(--gold-hi); font-weight:700; line-height:1;}
+.hero-stats .stat span{font-size:11px; color:var(--cream-dim); text-transform:uppercase; letter-spacing:.06em;}
+
+/* ---- ILUSTRASI HERO: KOPI PANAS + MONT BLANC ---- */
+.hero-illustration{width:100%; max-width:460px; margin:34px auto 0; display:block; filter:drop-shadow(0 18px 30px rgba(0,0,0,.45)); border-radius:18px;}
+.hero-photo-wrap{position:relative; overflow:hidden; aspect-ratio:4/3; background:#1B120C; border:1px solid var(--line);}
+.hero-photo{width:100%; height:100%; object-fit:cover; display:block;}
+.hero-beans-overlay{position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+@keyframes steamRise{
+  0%{transform:translateY(12px) scale(.85); opacity:0;}
+  15%{opacity:.6;}
+  50%{transform:translateY(-8px) scale(1.05); opacity:.75;}
+  85%{opacity:.2;}
+  100%{transform:translateY(-30px) scale(1.2); opacity:0;}
+}
+.steam{animation:steamRise 3.2s ease-in-out infinite; transform-origin:center bottom;}
+.steam2{animation-delay:1.05s;}
+.steam3{animation-delay:2.1s;}
+
+@keyframes beanFloat{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-9px) rotate(6deg);}
+}
+.bean{transform-box:fill-box; transform-origin:center; animation:beanFloat 4.2s ease-in-out infinite;}
+.b1{animation-delay:0s;} .b2{animation-delay:.4s;} .b3{animation-delay:.8s;} .b4{animation-delay:1.2s;} .b5{animation-delay:1.6s;}
+.b6{animation-delay:2s;} .b7{animation-delay:2.4s;} .b8{animation-delay:2.8s;} .b9{animation-delay:3.2s;} .b10{animation-delay:3.6s;}
+@media(prefers-reduced-motion:reduce){.steam,.bean{animation:none;}}
+@media(prefers-reduced-motion:reduce){.steam{animation:none;}}
+
+/* ---- HALAMAN UTAMA (MENU) ---- */
+.menu-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:28px 0 10px;}
+.menu-tile{
+  display:flex; align-items:center; gap:16px; text-align:left; width:100%;
+  background:var(--panel); border:1px solid var(--line); border-radius:16px;
+  padding:20px; cursor:pointer; transition:.2s ease; color:var(--cream); font-family:'Inter';
+  box-shadow:var(--shadow); -webkit-tap-highlight-color:transparent;
+}
+.menu-tile:hover{transform:translateY(-4px); border-color:rgba(201,161,91,.4); box-shadow:0 20px 40px rgba(0,0,0,.5);}
+.menu-tile-icon{font-size:32px; flex-shrink:0; line-height:1;}
+.menu-tile-body{display:flex; flex-direction:column; gap:4px; flex:1;}
+.menu-tile-title{font-family:'Fraunces',serif; font-size:18px; font-weight:600;}
+.menu-tile-desc{font-size:12.5px; color:var(--cream-dim); line-height:1.4;}
+.menu-tile-count{font-family:'JetBrains Mono'; font-size:11px; color:var(--gold-hi); margin-top:2px;}
+.menu-tile-arrow{font-size:20px; color:var(--gold-hi); flex-shrink:0;}
+
+/* ---- MODE PER-HALAMAN ---- */
+.section-page{display:none;}
+.section-page.active{display:block;}
+.back-btn{
+  display:inline-flex; align-items:center; gap:8px; background:var(--panel-hi); border:1px solid var(--line);
+  color:var(--cream); font-family:'Inter'; font-weight:600; font-size:13px; padding:10px 16px;
+  border-radius:999px; cursor:pointer; margin:24px 0 4px; -webkit-tap-highlight-color:transparent; transition:.2s;
+}
+.back-btn:hover{border-color:var(--gold-hi); color:var(--gold-hi);}
+
+/* ---- KAFE REKOMENDASI ---- */
+.cafe-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px;}
+.cafecard{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px; box-shadow:var(--shadow);}
+.cafecard .toprow{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:6px;}
+.cafecard h3{margin:0; font-size:17px; font-weight:600;}
+.cafecard .area{font-size:12px; color:var(--gold-hi); margin:2px 0 10px; font-family:'JetBrains Mono';}
+.cafecard p{font-size:13.5px; color:var(--cream-dim); margin:0 0 10px;}
+.cafecard .sig{font-size:11.5px; background:var(--panel-hi); border:1px solid var(--line); padding:4px 10px; border-radius:999px; color:var(--cream); display:inline-block;}
+.cafecard .trend{font-size:11px; background:linear-gradient(90deg,var(--gold),var(--rust)); color:#241610; padding:4px 10px; border-radius:999px; display:inline-block; font-weight:700; margin-left:6px;}
+.cafe-note{font-size:11.5px; color:var(--cream-dim); margin:-6px 0 22px; font-style:italic;}
+
+/* ---- NAV ---- */
+nav.tabs{
+  position:sticky; top:0; z-index:40;
+  background:rgba(27,18,12,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top);
+}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:0;padding-bottom:0; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+nav.tabs .wrap::-webkit-scrollbar{display:none;}
+nav.tabs button{
+  background:none;border:none;color:var(--cream-dim);
+  font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+  padding:18px 16px; cursor:pointer; white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:.2s;
+  -webkit-tap-highlight-color:transparent;
+}
+nav.tabs button:hover{color:var(--cream);}
+nav.tabs button.active{color:var(--gold-hi);border-bottom-color:var(--gold-hi);}
+
+/* ---- BOTTOM NAV (mobile only) ---- */
+nav.bottom-nav{
+  display:none;
+  position:fixed; left:0; right:0; bottom:0; z-index:50;
+  background:rgba(27,18,12,0.97);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+}
+nav.bottom-nav ul{list-style:none; margin:0; padding:0; display:flex; justify-content:space-around;}
+nav.bottom-nav li{flex:1;}
+nav.bottom-nav button{
+  width:100%; background:none; border:none; color:var(--cream-dim);
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  font-family:'Inter'; font-size:9.5px; font-weight:600;
+  padding:6px 1px; border-radius:10px; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+nav.bottom-nav button .bicon{font-size:19px; line-height:1;}
+nav.bottom-nav button.active{color:var(--gold-hi); background:rgba(201,161,91,0.10);}
+
+section.panel{padding:56px 0; border-bottom:1px solid var(--line);}
+section.panel:last-of-type{border-bottom:none;}
+.panel-head{margin-bottom:34px; max-width:640px; position:relative;}
+.panel-head .eyebrow{margin-bottom:10px;}
+.panel-head h2{font-size:clamp(28px,3.4vw,40px); margin:0 0 10px; font-weight:600;}
+.panel-head p{color:var(--cream-dim); margin:0; font-size:15px;}
+.panel-num{
+  position:absolute; right:0; top:-30px; font-family:'Fraunces',serif; font-weight:700;
+  font-size:96px; color:transparent; -webkit-text-stroke:1px rgba(201,161,91,0.18);
+  line-height:1; pointer-events:none; user-select:none; z-index:-1; display:none;
+}
+@media(min-width:860px){ .panel-num{display:block;} }
+
+/* ---- FILTER BAR ---- */
+.filterbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:28px;}
+.filterbar .seg{display:flex; background:var(--panel); border:1px solid var(--line); border-radius:999px; padding:4px;}
+.filterbar .seg button{
+  border:none;background:none;color:var(--cream-dim);font-weight:600;font-size:13px;
+  padding:8px 16px;border-radius:999px;cursor:pointer;transition:.2s;font-family:'Inter';
+}
+.filterbar .seg button.active{background:var(--gold); color:#241610;}
+.filterbar input[type=text]{
+  flex:1;min-width:180px;
+  background:var(--panel);border:1px solid var(--line);color:var(--cream);
+  padding:10px 16px;border-radius:999px;font-size:14px;font-family:'Inter';
+}
+.filterbar input[type=text]::placeholder{color:var(--cream-dim);}
+.filterbar input[type=text]:focus, .filterbar .seg button:focus, nav.tabs button:focus{outline:2px solid var(--gold-hi); outline-offset:2px;}
+
+/* ---- COFFEE GRID ---- */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px;}
+.ccard{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:0; overflow:hidden; transition:.2s; box-shadow:var(--shadow);
+}
+.ccard summary{
+  list-style:none; cursor:pointer; padding:20px 20px 16px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.ccard summary::-webkit-details-marker{display:none;}
+.ccard .toprow{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+.ccard h3{margin:0; font-size:19px; font-weight:600;}
+.ccard .origin{font-size:12.5px; color:var(--cream-dim); margin-top:3px;}
+.badge{
+  font-family:'JetBrains Mono'; font-size:11px; letter-spacing:.05em;
+  padding:4px 9px; border-radius:6px; border:1px solid var(--line); color:var(--gold-hi);
+  white-space:nowrap; text-transform:uppercase;
+}
+.badge.robusta{color:var(--rust); border-color:rgba(154,81,51,.4);}
+.badge.liberika{color:var(--olive); border-color:rgba(137,145,106,.4);}
+.badge.lainnya{color:var(--cream-dim); border-color:var(--line);}
+.speciesnote{font-size:11.5px; color:var(--cream-dim); margin:-18px 0 22px;}
+.mcard .tag.manual{color:var(--olive);}
+.mcard .actions{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+.mcard .actions button, .mcard .actions a{
+  font-family:'Inter'; font-weight:600; font-size:12px; cursor:pointer;
+  border-radius:999px; padding:7px 13px; text-decoration:none;
+  display:inline-flex; align-items:center; gap:6px;
+  -webkit-tap-highlight-color:transparent;
+}
+.mcard .actions .btn-steps{background:var(--panel-hi); border:1px solid var(--line); color:var(--cream);}
+.mcard .actions .btn-steps:hover{border-color:var(--gold-hi);}
+.mcard .actions .btn-video{background:var(--gold); border:1px solid var(--gold); color:#241610;}
+.mcard .actions .btn-video:hover{background:var(--gold-hi);}
+.mcard .stepbox{
+  margin-top:12px; padding-top:12px; border-top:1px dashed var(--line);
+  display:none; font-size:12.5px; color:var(--cream-dim);
+}
+.mcard .stepbox.open{display:block;}
+.mcard .stepbox ol{margin:0; padding-left:18px;}
+.mcard .stepbox li{margin-bottom:5px;}
+.notes{display:flex; flex-wrap:wrap; gap:6px;}
+.notes span{
+  font-size:12px; background:rgba(242,232,213,0.06); border:1px solid var(--line);
+  padding:3px 9px; border-radius:999px; color:var(--cream-dim);
+}
+.acid-gauge{display:flex; align-items:center; gap:8px; margin-top:2px;}
+.acid-gauge .lbl{font-size:11px; color:var(--cream-dim); font-family:'JetBrains Mono'; width:96px;}
+.drips{display:flex; gap:4px;}
+.drip{width:9px;height:12px;border-radius:0 0 50% 50%; background:rgba(242,232,213,0.14); transform:rotate(180deg);}
+.drip.on{background:linear-gradient(180deg,var(--gold-hi),var(--rust));}
+.chevron{margin-left:auto; color:var(--cream-dim); transition:transform .2s; font-size:13px;}
+.ccard[open] .chevron{transform:rotate(180deg);}
+.cbody{padding:0 20px 20px; border-top:1px solid var(--line); padding-top:16px; font-size:14px; color:var(--cream-dim);}
+.cbody .row{display:flex; gap:8px; margin-bottom:8px;}
+.cbody .row b{color:var(--cream); min-width:118px; font-weight:600; font-size:13px;}
+.pillrow{display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;}
+.pillrow a{
+  font-size:12px; background:var(--panel-hi); border:1px solid var(--line); color:var(--gold-hi);
+  padding:5px 10px; border-radius:999px; text-decoration:none; font-weight:600;
+}
+.pillrow a:hover{background:var(--gold); color:#241610;}
+
+/* ---- INTERAKSI & ANIMASI ---- */
+@keyframes fadeInUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+.ccard,.bcard,.mcard{animation:fadeInUp .45s ease both;}
+.ccard{transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;}
+.bcard{transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;}
+.mcard{transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;}
+.ccard:hover,.bcard:hover,.mcard:hover{transform:translateY(-4px); border-color:rgba(201,161,91,0.4); box-shadow:0 20px 40px rgba(0,0,0,0.5);}
+.ccard::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--gold),var(--rust));}
+@media(prefers-reduced-motion: reduce){
+  .ccard,.bcard,.mcard{animation:none;}
+}
+
+/* ---- BREW METHOD CARDS ---- */
+.brew-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:18px;}
+.bcard{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px; box-shadow:var(--shadow);}
+.bcard h3{margin:0 0 4px; font-size:20px;}
+.bcard .desc{font-size:13px; color:var(--cream-dim); margin-bottom:16px;}
+.ratio-big{
+  font-family:'JetBrains Mono'; font-size:30px; color:var(--gold-hi); font-weight:700; letter-spacing:.02em;
+}
+.specs{display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; margin:14px 0 16px; font-size:12.5px;}
+.specs div b{display:block; color:var(--cream-dim); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.04em; margin-bottom:2px;}
+.specs div span{color:var(--cream); font-family:'JetBrains Mono'; font-size:13px;}
+.calc{background:var(--bg-alt); border:1px dashed var(--line); border-radius:10px; padding:12px 14px; margin-top:6px;}
+.calc label{font-size:11.5px; color:var(--cream-dim); display:flex; justify-content:space-between; align-items:center; gap:8px;}
+.calc input[type=range]{flex:1; accent-color:var(--gold-hi);}
+.calc .out{font-family:'JetBrains Mono'; font-size:13px; margin-top:8px; color:var(--gold-hi);}
+.bcard .steps{margin:10px 0 0; padding-left:18px; font-size:12.5px; color:var(--cream-dim);}
+.bcard .steps li{margin-bottom:4px;}
+
+/* ---- MACHINE CARDS ---- */
+.mach-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:18px;}
+.mcard{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px; box-shadow:var(--shadow);}
+.mcard .icon{font-size:26px; margin-bottom:10px; display:block;}
+.mcard h3{margin:0 0 6px; font-size:17px;}
+.mcard p{font-size:13px; color:var(--cream-dim); margin:0 0 10px;}
+.mcard .tag{font-size:11px; font-family:'JetBrains Mono'; color:var(--gold-hi); border:1px solid var(--line); padding:3px 8px; border-radius:6px; margin-right:6px; display:inline-block; margin-bottom:6px;}
+
+/* ---- LAINNYA ---- */
+.roast-scale{display:flex; border-radius:12px; overflow:hidden; margin-bottom:22px; border:1px solid var(--line);}
+.roast-scale div{flex:1; padding:18px 16px; font-size:13px;}
+.roast-scale div h4{margin:0 0 6px; font-family:'Fraunces'; font-size:16px;}
+.roast-scale div p{margin:0; color:rgba(0,0,0,0.55); font-size:12.5px;}
+.r1{background:#D9BE8F; color:#2b1c10;}
+.r2{background:#B4834A; color:#241608;}
+.r3{background:#5B3A22; color:#F3E9D7;}
+.r3 p{color:rgba(243,233,215,0.7);}
+
+.tips-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; margin-bottom:36px;}
+.tip{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px;}
+.tip .n{font-family:'JetBrains Mono'; color:var(--gold-hi); font-size:12px;}
+.tip h4{margin:8px 0 6px; font-size:15px;}
+.tip p{margin:0; font-size:13px; color:var(--cream-dim);}
+
+.gloss{border-top:1px solid var(--line);}
+.gloss details{border-bottom:1px solid var(--line); padding:14px 0;}
+.gloss summary{cursor:pointer; font-weight:600; font-size:14.5px; list-style:none; display:flex; justify-content:space-between;}
+.gloss summary::-webkit-details-marker{display:none;}
+.gloss summary::after{content:"+"; color:var(--gold-hi); font-size:18px;}
+.gloss details[open] summary::after{content:"–";}
+.gloss p{color:var(--cream-dim); font-size:13.5px; margin:10px 0 0;}
+
+footer{padding:34px 0; text-align:center; color:var(--cream-dim); font-size:12.5px;}
+
+.empty{color:var(--cream-dim); font-size:14px; padding:30px 0;}
+
+@media(max-width:640px){
+  .hero-drip{display:none;}
+  header.hero{padding:44px 0 32px;}
+  .hero h1{font-size:clamp(34px,10vw,46px);}
+  .hero p.lede{font-size:15px;}
+  .roast-scale{flex-direction:column;}
+
+  body{padding-bottom:74px;} /* space for bottom nav */
+  nav.bottom-nav{display:block;}
+
+  .wrap{padding:0 16px;}
+  section.panel{padding:38px 0;}
+  .panel-head h2{font-size:26px;}
+
+  .filterbar{gap:8px;}
+  .filterbar .seg{width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .filterbar .seg button{padding:9px 14px; font-size:12.5px;}
+  .filterbar input[type=text]{width:100%; padding:12px 16px; font-size:16px;} /* 16px avoids iOS auto-zoom */
+
+  .grid, .brew-grid, .mach-grid{grid-template-columns:1fr;}
+  .ccard summary, .bcard, .mcard{padding:18px;}
+  .cbody{padding:0 18px 18px;}
+
+  .specs{grid-template-columns:1fr 1fr;}
+  .ratio-big{font-size:26px;}
+
+  .pillrow a, .mcard .actions button, .mcard .actions a{padding:9px 14px; font-size:12.5px;}
+  nav.tabs button{padding:14px 14px; font-size:13.5px;}
+}
+@media(max-width:380px){
+  .specs{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HALAMAN DEPAN ============ -->
+<div id="homeScreen">
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Panduan Rasa &amp; Seduhan</div>
+      <h1>Atlas Kopi<br><em>Nusantara &amp; Dunia</em></h1>
+      <p class="lede">Jelajahi karakter biji kopi dari ujung Aceh sampai dataran tinggi Ethiopia — lengkap dengan tingkat keasaman, takaran seduh yang presisi, dan mesin yang paling cocok untuk secangkir yang kamu mau.</p>
+
+      <div class="hero-illustration hero-photo-wrap">
+        <img class="hero-photo" src="https://images.stockcake.com/public/c/3/3/c334374d-d4c7-48b2-814f-b6db71a28895_medium/steaming-coffee-cup-stockcake.jpg" alt="Foto naturalis secangkir kopi panas dengan asap mengepul" loading="lazy">
+        <svg class="hero-beans-overlay" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="beanGradA" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C9A15B"/><stop offset="100%" stop-color="#5B3A22"/>
+            </linearGradient>
+            <linearGradient id="beanGradB" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E4C27E"/><stop offset="100%" stop-color="#8B5A34"/>
+            </linearGradient>
+            <g id="bean">
+              <ellipse cx="0" cy="0" rx="22" ry="14"/>
+              <path d="M -8 -11 Q 2 0 -8 11" fill="none" stroke="#1B120C" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+            </g>
+          </defs>
+          <g transform="translate(40,208) rotate(-20) scale(.8)"><use href="#bean" fill="url(#beanGradA)" class="bean b1"/></g>
+          <g transform="translate(360,206) rotate(15) scale(.7)"><use href="#bean" fill="url(#beanGradB)" class="bean b2"/></g>
+          <g transform="translate(28,36) rotate(30) scale(.65)"><use href="#bean" fill="url(#beanGradA)" class="bean b3"/></g>
+          <g transform="translate(372,34) rotate(-25) scale(.75)"><use href="#bean" fill="url(#beanGradB)" class="bean b4"/></g>
+          <g transform="translate(200,215) rotate(10) scale(.6)"><use href="#bean" fill="url(#beanGradA)" class="bean b5"/></g>
+          <g transform="translate(80,20) rotate(-15) scale(.55)"><use href="#bean" fill="url(#beanGradB)" class="bean b6"/></g>
+        </svg>
+      </div>
+
+      <div class="hero-stats" id="heroStats"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="panel-head" style="margin:44px 0 8px;">
+      <div class="eyebrow">Menu Utama</div>
+      <h2>Pilih yang ingin kamu jelajahi</h2>
+      <p>Ketuk salah satu menu di bawah untuk membuka halamannya.</p>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </main>
+
+  <footer class="wrap">Atlas Kopi — dibuat untuk pecinta kopi yang penasaran. Selamat menyeduh. ☕</footer>
+</div>
+
+<!-- ============ TAMPILAN PER HALAMAN ============ -->
+<div id="pageView" style="display:none;">
+  <nav class="tabs">
+    <div class="wrap">
+      <button data-target="home">🏠 Beranda</button>
+      <button data-target="jenis">☕ Jenis Kopi</button>
+      <button data-target="seduh">🧪 Metode Seduh</button>
+      <button data-target="minuman">🥤 Menu Minuman</button>
+      <button data-target="mesin">⚙️ Mesin Kopi</button>
+      <button data-target="kafe">📍 Kafe Pilihan</button>
+      <button data-target="lainnya">📖 Lainnya</button>
+    </div>
+  </nav>
+
+  <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi cepat">
+    <ul>
+      <li><button data-target="home"><span class="bicon">🏠</span>Beranda</button></li>
+      <li><button data-target="jenis"><span class="bicon">🫘</span>Jenis</button></li>
+      <li><button data-target="seduh"><span class="bicon">🧪</span>Seduh</button></li>
+      <li><button data-target="minuman"><span class="bicon">🥤</span>Menu</button></li>
+      <li><button data-target="mesin"><span class="bicon">⚙️</span>Mesin</button></li>
+      <li><button data-target="kafe"><span class="bicon">📍</span>Kafe</button></li>
+      <li><button data-target="lainnya"><span class="bicon">📖</span>Lainnya</button></li>
+    </ul>
+  </nav>
+
+  <main class="wrap">
+    <button class="back-btn" id="backHomeBtn">← Kembali ke Beranda</button>
+
+    <!-- JENIS KOPI -->
+    <section class="panel section-page" id="jenis">
+    <div class="panel-head">
+      <span class="panel-num">01</span>
+      <div class="eyebrow">01 — Ragam Biji</div>
+      <h2>Jenis kopi, dari kebun sampai cangkir</h2>
+      <p>Dikelompokkan dalam 4 jenis biji — Arabika, Robusta, Liberika, dan Lainnya — dari puluhan daerah di Indonesia maupun dunia. Ketuk kartu untuk melihat detail keasaman, catatan rasa, dan metode seduh yang paling pas.</p>
+    </div>
+
+    <div class="filterbar">
+      <div class="seg" id="originSeg">
+        <button class="active" data-origin="semua">Semua Asal</button>
+        <button data-origin="nusantara">🇮🇩 Nusantara</button>
+        <button data-origin="mancanegara">🌍 Mancanegara</button>
+      </div>
+      <input type="text" id="searchInput" placeholder="Cari nama kopi, daerah, atau rasa…">
+    </div>
+    <div class="filterbar">
+      <div class="seg" id="speciesSeg">
+        <button class="active" data-species="semua">Semua Jenis</button>
+        <button data-species="arabika">Arabika</button>
+        <button data-species="robusta">Robusta</button>
+        <button data-species="liberika">Liberika</button>
+        <button data-species="lainnya">Lainnya</button>
+      </div>
+    </div>
+    <p class="speciesnote">Arabika: aromatik &amp; keasaman lebih terasa · Robusta: kuat, pahit, kafein tinggi · Liberika: aroma buah eksotis khas (mis. nangka) · Lainnya: proses spesial, hybrid, atau bagian non-biji.</p>
+
+    <div class="grid" id="coffeeGrid"></div>
+    <p class="empty" id="emptyState" style="display:none;">Tidak ada kopi yang cocok dengan pencarianmu. Coba kata kunci lain.</p>
+  </section>
+
+    <!-- METODE SEDUH -->
+    <section class="panel section-page" id="seduh">
+    <div class="panel-head">
+      <span class="panel-num">02</span>
+      <div class="eyebrow">02 — Takaran &amp; Teknik</div>
+      <h2>Metode penyeduhan &amp; takarannya</h2>
+      <p>Geser slider takaran kopi untuk menghitung ulang jumlah air sesuai rasio masing-masing metode.</p>
+    </div>
+    <div class="brew-grid" id="brewGrid"></div>
+  </section>
+
+    <!-- MENU MINUMAN -->
+    <section class="panel section-page" id="minuman">
+    <div class="panel-head">
+      <span class="panel-num">03</span>
+      <div class="eyebrow">03 — Sajian di Meja</div>
+      <h2>Menu minuman kopi, manual &amp; mesin</h2>
+      <p>Dari espresso murni sampai kopi telur tradisional — lengkap dengan komposisi, langkah pembuatan step-by-step, dan tautan video tutorial untuk tiap menu.</p>
+    </div>
+    <div class="filterbar">
+      <div class="seg" id="drinkSeg">
+        <button class="active" data-kind="semua">Semua</button>
+        <button data-kind="mesin">☕ Berbasis Mesin</button>
+        <button data-kind="manual">🫗 Manual/Tradisional</button>
+      </div>
+    </div>
+    <div class="mach-grid" id="drinkGrid"></div>
+  </section>
+
+    <!-- MESIN KOPI -->
+    <section class="panel section-page" id="mesin">
+    <div class="panel-head">
+      <span class="panel-num">04</span>
+      <div class="eyebrow">04 — Peralatan</div>
+      <h2>Mesin &amp; alat kopi yang cocok</h2>
+      <p>Pilih alat sesuai metode seduh dan gaya minum kopi harianmu.</p>
+    </div>
+    <div class="mach-grid" id="machGrid"></div>
+  </section>
+
+    <!-- KAFE PILIHAN -->
+    <section class="panel section-page" id="kafe">
+      <div class="panel-head">
+        <div class="eyebrow">✨ — Rekomendasi Lapangan</div>
+        <h2>Kafe kopi pilihan di 5 kota</h2>
+        <p>Kurasi coffee shop di Jakarta (termasuk Tangerang Selatan & Depok), Bandung, Semarang, Yogyakarta (termasuk Sleman & Bantul), dan Surabaya — minimal 20 tempat per kota.</p>
+      </div>
+      <div class="filterbar">
+        <div class="seg" id="citySeg">
+          <button class="active" data-city="Semua">Semua Kota</button>
+          <button data-city="Jakarta">Jakarta</button>
+          <button data-city="Bandung">Bandung</button>
+          <button data-city="Semarang">Semarang</button>
+          <button data-city="Yogyakarta">Yogyakarta</button>
+          <button data-city="Surabaya">Surabaya</button>
+        </div>
+      </div>
+      <div class="filterbar">
+        <div class="seg" id="cafeFilterSeg">
+          <button class="active" data-filter="semua">Semua Vibe</button>
+          <button data-filter="trending">🔥 Kekinian & Viral</button>
+        </div>
+      </div>
+      <p class="cafe-note">Info lokasi & menu dapat berubah sewaktu-waktu — cek ulang jam buka sebelum berkunjung.</p>
+      <div class="cafe-grid" id="cafeGrid"></div>
+    </section>
+
+    <!-- LAINNYA -->
+    <section class="panel section-page" id="lainnya">
+      <div class="panel-head">
+        <span class="panel-num">05</span>
+        <div class="eyebrow">05 — Selebihnya</div>
+        <h2>Yang perlu kamu tahu juga</h2>
+        <p>Tingkat sangrai, cara menyimpan, dan istilah-istilah yang sering muncul di dunia kopi.</p>
+      </div>
+
+      <h3 style="font-size:16px; margin-bottom:12px;">Tingkat Sangrai (Roast Level)</h3>
+      <div class="roast-scale">
+        <div class="r1"><h4>Light Roast</h4><p>Keasaman tinggi, body ringan, rasa asal biji sangat terasa. Cocok untuk V60 &amp; Aeropress.</p></div>
+        <div class="r2"><h4>Medium Roast</h4><p>Keseimbangan asam &amp; manis, body sedang. Cocok untuk hampir semua metode.</p></div>
+        <div class="r3"><h4>Dark Roast</h4><p>Keasaman rendah, body berat, rasa pahit &amp; smoky dominan. Cocok untuk espresso &amp; moka pot.</p></div>
+      </div>
+
+      <h3 style="font-size:16px; margin:30px 0 12px;">Tips Menyimpan &amp; Menikmati Kopi</h3>
+      <div class="tips-grid" id="tipsGrid"></div>
+
+      <h3 style="font-size:16px; margin-bottom:6px;">Istilah Kopi</h3>
+      <div class="gloss" id="glossary"></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const coffees = [
+  {name:"Gayo, Aceh", origin:"nusantara", region:"Dataran Tinggi Gayo, Aceh 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["rempah","cokelat","earthy"], desc:"Salah satu kopi paling ikonik Indonesia, ditanam di ketinggian 1200–1700 mdpl. Body tebal dengan sentuhan rempah dan sedikit rasa tanah basah.", brew:["v60","frenchpress"], machine:"Manual Drip / French Press"},
+  {name:"Mandailing", origin:"nusantara", region:"Tapanuli, Sumatera Utara 🇮🇩", species:"arabika", type:"Arabika", acid:2, notes:["full body","herbal","tembakau"], desc:"Body sangat tebal dengan keasaman rendah, aftertaste panjang beraroma herbal dan sedikit tembakau kering.", brew:["frenchpress","moka"], machine:"French Press / Moka Pot"},
+  {name:"Toraja", origin:"nusantara", region:"Sulawesi Selatan 🇮🇩", species:"arabika", type:"Arabika", acid:2, notes:["earthy","rempah","manis lembut"], desc:"Karakter khas Sulawesi: earthy, sedikit pedas rempah, dengan rasa manis lembut di akhir tegukan.", brew:["frenchpress","tubruk"], machine:"French Press"},
+  {name:"Kintamani", origin:"nusantara", region:"Bali 🇮🇩", species:"arabika", type:"Arabika", acid:4, notes:["jeruk","floral","citrus"], desc:"Ditanam berdampingan dengan tanaman jeruk sehingga membawa keasaman cerah dan aroma citrus yang khas.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Java Preanger", origin:"nusantara", region:"Jawa Barat 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["nutty","herbal","clean"], desc:"Kopi sejarah dari masa kolonial dengan rasa bersih, nutty, dan sedikit herbal — profil klasik 'kopi Jawa'.", brew:["v60","frenchpress"], machine:"V60"},
+  {name:"Flores Bajawa", origin:"nusantara", region:"Nusa Tenggara Timur 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["cokelat","karamel","rempah"], desc:"Manis alami seperti karamel dengan sentuhan cokelat dan rempah hangat, body medium-full.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Wamena", origin:"nusantara", region:"Papua Tengah 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["floral","fruity ringan"], desc:"Ditanam organik di lembah Baliem, profilnya floral lembut dengan sentuhan buah-buahan ringan.", brew:["v60"], machine:"V60"},
+  {name:"Lampung", origin:"nusantara", region:"Lampung, Sumatera 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["earthy","kuat","pahit"], desc:"Robusta klasik dengan body berat, kadar kafein tinggi, dan rasa pahit-kuat yang jadi favorit kopi tubruk.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+  {name:"Kopi Luwak", origin:"nusantara", region:"Berbagai daerah 🇮🇩", species:"lainnya", type:"Arabika/Robusta", acid:1, notes:["smooth","earthy","low bitter"], desc:"Diproses lewat fermentasi alami di pencernaan luwak sehingga keasaman & kepahitannya jauh berkurang, rasa jadi sangat halus.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+
+  {name:"Yirgacheffe", origin:"mancanegara", region:"Ethiopia 🇪🇹", species:"arabika", type:"Arabika", acid:5, notes:["floral","bergamot","blueberry"], desc:"Sering disebut 'kampung halaman kopi'. Profilnya sangat floral dengan aroma bergamot dan buah beri yang cerah.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Kenya AA", origin:"mancanegara", region:"Kenya 🇰🇪", species:"arabika", type:"Arabika", acid:5, notes:["blackcurrant","tomat","wine"], desc:"Keasaman tajam layaknya anggur, dengan rasa buah blackcurrant dan sedikit sentuhan tomat yang unik.", brew:["v60"], machine:"V60"},
+  {name:"Huila", origin:"mancanegara", region:"Kolombia 🇨🇴", species:"arabika", type:"Arabika", acid:4, notes:["karamel","apel merah"], desc:"Seimbang antara manis karamel dan asam segar apel merah, cocok untuk pemula yang baru coba pour over.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+  {name:"Santos", origin:"mancanegara", region:"Brasil 🇧🇷", species:"arabika", type:"Arabika", acid:2, notes:["cokelat","kacang","nutty"], desc:"Kopi dasar espresso dunia — nutty, sedikit cokelat, body medium dengan keasaman rendah yang lembut.", brew:["espresso","moka"], machine:"Mesin Espresso / Moka Pot"},
+  {name:"Blue Mountain", origin:"mancanegara", region:"Jamaika 🇯🇲", species:"arabika", type:"Arabika", acid:3, notes:["mild","balanced","manis lembut"], desc:"Salah satu kopi termahal di dunia, dikenal karena rasanya yang sangat halus, seimbang, dan minim kepahitan.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Robusta Buon Ma Thuot", origin:"mancanegara", region:"Vietnam 🇻🇳", species:"robusta", type:"Robusta", acid:1, notes:["kuat","cokelat gelap","pahit"], desc:"Robusta kental khas kopi susu Vietnam, biasa diseduh dengan phin dan kental manis.", brew:["phin"], machine:"Phin Vietnam"},
+  {name:"Antigua", origin:"mancanegara", region:"Guatemala 🇬🇹", species:"arabika", type:"Arabika", acid:4, notes:["cokelat","rempah","smoky"], desc:"Tumbuh di area vulkanik, memberi rasa smoky khas berpadu cokelat dan rempah hangat.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+  {name:"Mocha", origin:"mancanegara", region:"Yaman 🇾🇪", species:"arabika", type:"Arabika", acid:3, notes:["wine","rempah","cokelat"], desc:"Salah satu kopi tertua di dunia, punya rasa kompleks menyerupai anggur dengan sentuhan rempah dan cokelat.", brew:["frenchpress"], machine:"French Press"},
+
+  /* ===== TAMBAHAN ARABIKA NUSANTARA ===== */
+  {name:"Kerinci", origin:"nusantara", region:"Kerinci, Jambi 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["rempah","floral","manis"], desc:"Ditanam di lereng Gunung Kerinci, punya profil floral dengan sentuhan rempah dan rasa manis yang seimbang.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Ijen Raung", origin:"nusantara", region:"Bondowoso–Banyuwangi, Jawa Timur 🇮🇩", species:"arabika", type:"Arabika", acid:4, notes:["citrus","floral"], desc:"Tumbuh di kaki Gunung Ijen, keasamannya cerah dengan aroma citrus dan bunga yang tajam.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Sindoro Sumbing", origin:"nusantara", region:"Temanggung, Jawa Tengah 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["nutty","cokelat"], desc:"Kopi dataran tinggi Jawa Tengah dengan rasa nutty yang hangat dan sentuhan cokelat ringan.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+  {name:"Malabar", origin:"nusantara", region:"Bandung Selatan, Jawa Barat 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["karamel","herbal"], desc:"Salah satu pelopor specialty coffee Jawa Barat, karamel manis berpadu sentuhan herbal segar.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Dampit", origin:"nusantara", region:"Malang, Jawa Timur 🇮🇩", species:"arabika", type:"Arabika", acid:2, notes:["earthy","cokelat"], desc:"Kopi tua dari lereng Gunung Semeru dengan karakter earthy klasik dan sentuhan cokelat pahit lembut.", brew:["frenchpress","moka"], machine:"French Press / Moka Pot"},
+  {name:"Kalosi Enrekang", origin:"nusantara", region:"Enrekang, Sulawesi Selatan 🇮🇩", species:"arabika", type:"Arabika", acid:2, notes:["earthy","rempah"], desc:"Kerabat dekat Toraja dari dataran tinggi Enrekang, earthy dengan rempah yang lebih tegas.", brew:["frenchpress","tubruk"], machine:"French Press"},
+  {name:"Solok Radjo", origin:"nusantara", region:"Solok, Sumatera Barat 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["fruity","manis"], desc:"Kopi rakyat Minangkabau dengan rasa fruity ringan dan manis alami yang bersih.", brew:["v60"], machine:"V60"},
+  {name:"Simalungun", origin:"nusantara", region:"Simalungun, Sumatera Utara 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["floral","jeruk"], desc:"Tumbuh di dataran tinggi dekat Danau Toba, floral dengan sentuhan jeruk yang segar.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Semendo", origin:"nusantara", region:"Muara Enim, Sumatera Selatan 🇮🇩", species:"arabika", type:"Arabika", acid:2, notes:["earthy","cokelat"], desc:"Kopi dataran tinggi Semendo yang earthy, body tebal dengan rasa cokelat pahit yang lembut.", brew:["frenchpress"], machine:"French Press"},
+  {name:"Manggarai", origin:"nusantara", region:"Manggarai, NTT (Flores) 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["karamel","rempah"], desc:"Dari dataran tinggi Flores bagian barat, manis karamel berpadu rempah hangat khas Nusa Tenggara.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Argopuro", origin:"nusantara", region:"Jember–Probolinggo, Jawa Timur 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["floral","teh"], desc:"Tumbuh di kawasan Pegunungan Argopuro, floral lembut dengan aftertaste menyerupai teh.", brew:["v60"], machine:"V60"},
+
+  /* ===== TAMBAHAN ROBUSTA NUSANTARA ===== */
+  {name:"Temanggung", origin:"nusantara", region:"Temanggung, Jawa Tengah 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["kuat","cokelat pahit"], desc:"Salah satu sentra robusta terbesar Indonesia, rasa kuat dan pahit khas kopi tubruk pasar tradisional.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+  {name:"Bengkulu", origin:"nusantara", region:"Bengkulu, Sumatera 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["earthy","kuat"], desc:"Salah satu penghasil robusta terbesar nasional, earthy dan kuat dengan body berat.", brew:["tubruk"], machine:"Tubruk"},
+  {name:"Pagar Alam", origin:"nusantara", region:"Pagar Alam, Sumatera Selatan 🇮🇩", species:"robusta", type:"Robusta", acid:2, notes:["earthy","kacang"], desc:"Tumbuh di lereng Gunung Dempo, earthy dengan sentuhan kacang yang khas untuk robusta dataran tinggi.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+  {name:"Liwa", origin:"nusantara", region:"Lampung Barat 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["kuat","pahit"], desc:"Robusta dataran tinggi Bukit Barisan, kuat dan pahit dengan body yang sangat tebal.", brew:["tubruk"], machine:"Tubruk"},
+  {name:"Ciwidey", origin:"nusantara", region:"Ciwidey, Jawa Barat 🇮🇩", species:"robusta", type:"Robusta", acid:2, notes:["cokelat","earthy"], desc:"Robusta dataran tinggi Jawa Barat dengan karakter cokelat pekat dan earthy yang seimbang.", brew:["moka","tubruk"], machine:"Moka Pot / Tubruk"},
+
+  /* ===== LIBERIKA — KHAS RIAU & JAMBI ===== */
+  {name:"Liberika Meranti", origin:"nusantara", region:"Kepulauan Meranti, Riau 🇮🇩", species:"liberika", type:"Liberika", acid:2, notes:["nangka","rempah","unik"], desc:"Tumbuh di lahan gambut, ciri khasnya aroma nangka matang yang kuat — jarang ditemui pada arabika/robusta.", brew:["tubruk","frenchpress"], machine:"Tubruk / French Press"},
+  {name:"Liberika Tungkal (Libtukom)", origin:"nusantara", region:"Tanjung Jabung Barat, Jambi 🇮🇩", species:"liberika", type:"Liberika", acid:2, notes:["nangka","floral"], desc:"Dikenal sebagai 'Libtukom', tumbuh di lahan gambut pesisir Jambi dengan aroma buah dan floral yang khas.", brew:["tubruk","frenchpress"], machine:"Tubruk / French Press"},
+  {name:"Liberika Rangsang", origin:"nusantara", region:"Pulau Rangsang, Riau 🇮🇩", species:"liberika", type:"Liberika", acid:2, notes:["buah eksotis","earthy"], desc:"Liberika pesisir dengan body besar dan aroma buah eksotis yang kuat, biji berukuran lebih besar dari arabika.", brew:["tubruk"], machine:"Tubruk"},
+
+  /* ===== LAINNYA — PROSES SPESIAL, HYBRID, NON-BIJI ===== */
+  {name:"Excelsa Tanggamus", origin:"nusantara", region:"Tanggamus, Lampung 🇮🇩", species:"lainnya", type:"Excelsa", acid:2, notes:["buah eksotis","asam unik"], desc:"Kerabat dekat liberika, punya keasaman unik menyerupai buah dan sering dipakai sebagai campuran blend.", brew:["frenchpress"], machine:"French Press"},
+  {name:"Kawa Daun", origin:"nusantara", region:"Sumatera Barat 🇮🇩", species:"lainnya", type:"Daun Kopi", acid:1, notes:["herbal","teh ringan"], desc:"Bukan diseduh dari biji, melainkan daun kopi yang diasap lalu diseduh seperti teh — minuman warisan leluhur Minang.", brew:["tubruk"], machine:"Tubruk / Teko Tanah Liat"},
+  {name:"Catimor Malabar", origin:"nusantara", region:"Bandung Selatan, Jawa Barat 🇮🇩", species:"lainnya", type:"Hybrid Arabika×Robusta", acid:3, notes:["seimbang","nutty"], desc:"Varietas hasil silang arabika dan robusta, tahan penyakit dengan rasa yang seimbang antara keduanya.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+
+  /* ===== TAMBAHAN ARABIKA MANCANEGARA ===== */
+  {name:"Sidamo", origin:"mancanegara", region:"Ethiopia 🇪🇹", species:"arabika", type:"Arabika", acid:4, notes:["floral","lemon","teh"], desc:"Dari dataran tinggi selatan Ethiopia, floral dengan sentuhan lemon dan aftertaste menyerupai teh hitam.", brew:["v60"], machine:"V60"},
+  {name:"Tarrazu", origin:"mancanegara", region:"Costa Rica 🇨🇷", species:"arabika", type:"Arabika", acid:4, notes:["citrus","karamel","bersih"], desc:"Tumbuh di dataran tinggi vulkanik, rasa bersih dengan keasaman citrus dan manis karamel.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Geisha", origin:"mancanegara", region:"Panama 🇵🇦", species:"arabika", type:"Arabika", acid:5, notes:["melati","jasmine","tropical"], desc:"Salah satu kopi paling prestisius di dunia, sangat floral menyerupai teh melati dengan sentuhan buah tropis.", brew:["v60"], machine:"V60"},
+  {name:"Kona", origin:"mancanegara", region:"Hawaii, Amerika Serikat 🇺🇸", species:"arabika", type:"Arabika", acid:3, notes:["kacang","karamel","smooth"], desc:"Kopi langka dari lereng gunung berapi Hawaii, halus dengan rasa kacang dan karamel yang lembut.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Rwanda Bourbon", origin:"mancanegara", region:"Rwanda 🇷🇼", species:"arabika", type:"Arabika", acid:4, notes:["citrus","floral"], desc:"Varietas Bourbon dataran tinggi Afrika Timur, keasaman cerah dengan aroma floral yang menonjol.", brew:["v60"], machine:"V60"},
+  {name:"PNG Sigri", origin:"mancanegara", region:"Papua Nugini 🇵🇬", species:"arabika", type:"Arabika", acid:3, notes:["fruity","karamel"], desc:"Tetangga geografis Papua Indonesia, fruity dengan manis karamel dan body medium-full.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Peru Chanchamayo", origin:"mancanegara", region:"Peru 🇵🇪", species:"arabika", type:"Arabika", acid:3, notes:["cokelat","kacang","ringan"], desc:"Kopi organik dataran tinggi Andes, ringan dengan rasa cokelat dan kacang yang lembut.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Marcala", origin:"mancanegara", region:"Honduras 🇭🇳", species:"arabika", type:"Arabika", acid:3, notes:["karamel","apel"], desc:"Kopi dataran tinggi Amerika Tengah dengan rasa manis karamel dan sentuhan asam apel segar.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+
+  /* ===== TAMBAHAN ROBUSTA MANCANEGARA ===== */
+  {name:"Monsooned Malabar", origin:"mancanegara", region:"Malabar, India 🇮🇳", species:"robusta", type:"Robusta", acid:1, notes:["earthy","rempah","low-acid"], desc:"Diproses dengan diangin-anginkan lewat angin monsun sehingga keasamannya sangat rendah dan rasa jadi tebal khas.", brew:["espresso","moka"], machine:"Mesin Espresso / Moka Pot"},
+  {name:"Robusta Uganda", origin:"mancanegara", region:"Uganda 🇺🇬", species:"robusta", type:"Robusta", acid:1, notes:["kuat","cokelat gelap"], desc:"Salah satu robusta asli terbaik dunia, kuat dengan rasa cokelat gelap yang pekat, sering untuk blend espresso.", brew:["espresso","moka"], machine:"Mesin Espresso / Moka Pot"},
+
+  /* ===== LIBERIKA MANCANEGARA ===== */
+  {name:"Kapeng Barako", origin:"mancanegara", region:"Batangas, Filipina 🇵🇭", species:"liberika", type:"Liberika", acid:2, notes:["earthy","smoky","kuat"], desc:"Liberika paling terkenal di Asia Tenggara, aroma smoky-earthy yang kuat dan sudah jadi budaya minum kopi lokal.", brew:["tubruk","frenchpress"], machine:"Tubruk / French Press"},
+  {name:"Liberica Terengganu", origin:"mancanegara", region:"Terengganu, Malaysia 🇲🇾", species:"liberika", type:"Liberika", acid:2, notes:["nangka","earthy"], desc:"Liberika Semenanjung Malaya dengan aroma nangka yang khas, biasa disangrai gelap dan diseduh pekat.", brew:["tubruk","frenchpress"], machine:"Tubruk / French Press"},
+
+  /* ===== TAMBAHAN BARU — NUSANTARA ===== */
+  {name:"Bener Meriah", origin:"nusantara", region:"Bener Meriah, Aceh 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["rempah","cokelat","manis"], desc:"Tetangga dataran tinggi Gayo dengan karakter serupa namun sedikit lebih manis dan ringan.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Humbang", origin:"nusantara", region:"Humbang Hasundutan, Sumatera Utara 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["floral","jeruk nipis"], desc:"Tumbuh di dataran tinggi dekat Danau Toba, floral cerah dengan sentuhan asam jeruk nipis.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Sembalun", origin:"nusantara", region:"Sembalun, Lombok, NTB 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["fruity","manis","clean"], desc:"Tumbuh di kaki Gunung Rinjani, rasanya bersih dengan manis fruity yang khas dataran tinggi Lombok.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Minahasa", origin:"nusantara", region:"Sulawesi Utara 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["cokelat","rempah cengkih"], desc:"Ditanam berdekatan dengan kebun cengkih dan pala, memberi sentuhan rempah yang unik pada rasanya.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Pupuan", origin:"nusantara", region:"Tabanan, Bali 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["earthy","kuat","kacang"], desc:"Robusta dataran tinggi Bali Barat, kuat dan earthy dengan sentuhan kacang yang khas.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+  {name:"Tulehu", origin:"nusantara", region:"Pulau Ambon, Maluku 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["kuat","earthy","pahit"], desc:"Robusta khas Maluku yang jadi bagian dari budaya minum kopi tubruk masyarakat Ambon.", brew:["tubruk"], machine:"Tubruk"},
+  {name:"Meratus", origin:"nusantara", region:"Pegunungan Meratus, Kalimantan Selatan 🇮🇩", species:"robusta", type:"Robusta", acid:2, notes:["earthy","cokelat pahit"], desc:"Kopi rakyat dataran tinggi Kalimantan yang earthy dengan body tebal dan rasa cokelat pahit.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+
+  /* ===== TAMBAHAN BARU — MANCANEGARA ===== */
+  {name:"Guji", origin:"mancanegara", region:"Ethiopia 🇪🇹", species:"arabika", type:"Arabika", acid:4, notes:["blueberry","floral","teh"], desc:"Dari dataran tinggi Guji yang berdekatan dengan Sidamo, sangat floral dengan rasa blueberry yang manis.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Kilimanjaro", origin:"mancanegara", region:"Tanzania 🇹🇿", species:"arabika", type:"Arabika", acid:4, notes:["citrus","wine","cerah"], desc:"Tumbuh di lereng Gunung Kilimanjaro, keasaman cerah menyerupai anggur dengan sentuhan citrus.", brew:["v60"], machine:"V60"},
+  {name:"Jinotega", origin:"mancanegara", region:"Nikaragua 🇳🇮", species:"arabika", type:"Arabika", acid:3, notes:["karamel","kacang","lembut"], desc:"Kopi Amerika Tengah dengan profil lembut, manis karamel dan sentuhan kacang yang ringan.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+  {name:"Yunnan", origin:"mancanegara", region:"Yunnan, Tiongkok 🇨🇳", species:"arabika", type:"Arabika", acid:2, notes:["cokelat","herbal","ringan"], desc:"Salah satu wilayah penghasil specialty coffee baru di Asia, ringan dengan rasa cokelat dan herbal.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Hibrido de Timor", origin:"mancanegara", region:"Timor Leste", species:"lainnya", type:"Hybrid Arabika×Robusta", acid:2, notes:["earthy","cokelat","tahan hama"], desc:"Hybrid alami arabika-robusta yang legendaris karena tahan penyakit karat daun, jadi induk banyak varietas hybrid dunia.", brew:["frenchpress","moka"], machine:"French Press / Moka Pot"},
+  {name:"Bolaven Robusta", origin:"mancanegara", region:"Dataran Tinggi Bolaven, Laos 🇱🇦", species:"robusta", type:"Robusta", acid:1, notes:["kuat","cokelat gelap"], desc:"Robusta dataran tinggi Laos yang kuat dan pekat, sering dipadukan gula & susu kental seperti kopi Vietnam.", brew:["phin","moka"], machine:"Phin / Moka Pot"},
+  {name:"Doi Chang", origin:"mancanegara", region:"Chiang Rai, Thailand 🇹🇭", species:"arabika", type:"Arabika", acid:3, notes:["floral","manis","clean"], desc:"Kopi dataran tinggi utara Thailand yang bersih, floral, dan manis — hasil program pengganti tanaman opium.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+
+  /* ===== TAMBAHAN BARU 2 — NUSANTARA ===== */
+  {name:"Lintong", origin:"nusantara", region:"Humbang, Sumatera Utara 🇮🇩", species:"arabika", type:"Arabika", acid:2, notes:["earthy","herbal","syrupy"], desc:"Salah satu nama kopi Sumatera paling terkenal di dunia, body sangat tebal nyaris sirupy dengan sentuhan herbal khas.", brew:["frenchpress","moka"], machine:"French Press / Moka Pot"},
+  {name:"Sumbawa", origin:"nusantara", region:"Sumbawa, NTB 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["earthy","kuat"], desc:"Robusta pulau Sumbawa dengan karakter earthy kuat, biasa diminum sebagai kopi tubruk sehari-hari masyarakat lokal.", brew:["tubruk"], machine:"Tubruk"},
+  {name:"Alor", origin:"nusantara", region:"Pulau Alor, NTT 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["floral","fruity"], desc:"Kopi pulau terpencil di ujung timur NTT, floral dengan sentuhan fruity ringan, masih tergolong specialty langka.", brew:["v60"], machine:"V60"},
+  {name:"Kepahiang", origin:"nusantara", region:"Kepahiang, Bengkulu 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["kuat","cokelat"], desc:"Sentra robusta dataran tinggi Bengkulu, kuat dengan sentuhan cokelat pekat, sering untuk campuran blend nasional.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+
+  /* ===== TAMBAHAN BARU 2 — MANCANEGARA ===== */
+  {name:"Nariño", origin:"mancanegara", region:"Kolombia 🇨🇴", species:"arabika", type:"Arabika", acid:4, notes:["citrus","floral","manis"], desc:"Ditanam di dataran sangat tinggi dekat khatulistiwa, keasamannya cerah dengan manis floral yang kompleks.", brew:["v60"], machine:"V60"},
+  {name:"Cerrado", origin:"mancanegara", region:"Brasil 🇧🇷", species:"arabika", type:"Arabika", acid:2, notes:["nutty","cokelat","karamel"], desc:"Wilayah dataran tinggi kering Brasil, hasil kopinya konsisten nutty-karamel, jadi favorit basis blend espresso dunia.", brew:["espresso","moka"], machine:"Mesin Espresso / Moka Pot"},
+  {name:"Pacamara", origin:"mancanegara", region:"El Salvador 🇸🇻", species:"arabika", type:"Arabika", acid:3, notes:["fruity","kompleks","cokelat"], desc:"Varietas hasil silang Pacas &amp; Maragogipe, biji berukuran besar dengan rasa kompleks perpaduan fruity dan cokelat.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Coorg", origin:"mancanegara", region:"Karnataka, India 🇮🇳", species:"arabika", type:"Arabika", acid:3, notes:["rempah","spicy","fruity"], desc:"Ditanam berdampingan kebun kapulaga dan lada di Ghats Barat, memberi sentuhan rempah yang unik pada rasanya.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Bugisu", origin:"mancanegara", region:"Gunung Elgon, Uganda 🇺🇬", species:"arabika", type:"Arabika", acid:4, notes:["citrus","wine","floral"], desc:"Arabika terbaik Uganda dari lereng Gunung Elgon, keasaman cerah menyerupai anggur dengan aroma floral.", brew:["v60"], machine:"V60"},
+
+  /* ===== TAMBAHAN BARU 3 — NUSANTARA ===== */
+  {name:"Rejang Lebong", origin:"nusantara", region:"Rejang Lebong, Bengkulu 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["fruity","manis","clean"], desc:"Arabika dataran tinggi Bengkulu dengan rasa fruity segar dan manis bersih, berbeda dari robusta Bengkulu yang lebih dikenal.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Pasaman", origin:"nusantara", region:"Pasaman, Sumatera Barat 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["floral","karamel"], desc:"Kopi rakyat dari lereng Gunung Talamau, floral lembut dengan manis karamel yang khas kopi Minang.", brew:["v60"], machine:"V60"},
+  {name:"Karo", origin:"nusantara", region:"Tanah Karo, Sumatera Utara 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["citrus","earthy"], desc:"Tumbuh di dataran tinggi dekat Gunung Sinabung, memadukan keasaman citrus dengan sentuhan earthy khas Sumatera.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Baturaja", origin:"nusantara", region:"Ogan Komering Ulu, Sumatera Selatan 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["kuat","earthy"], desc:"Robusta dataran rendah Sumatera Selatan, kuat dan earthy, umum diolah jadi kopi bubuk kemasan lokal.", brew:["tubruk"], machine:"Tubruk"},
+
+  /* ===== TAMBAHAN BARU 3 — MANCANEGARA ===== */
+  {name:"Huehuetenango", origin:"mancanegara", region:"Guatemala 🇬🇹", species:"arabika", type:"Arabika", acid:4, notes:["cokelat","apel","kompleks"], desc:"Ditanam di dataran sangat tinggi tanpa risiko embun beku, hasilnya kompleks dengan rasa cokelat dan asam apel yang jelas.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+  {name:"Ngozi", origin:"mancanegara", region:"Burundi 🇧🇮", species:"arabika", type:"Arabika", acid:4, notes:["blackcurrant","citrus"], desc:"Kopi Afrika Timur dengan profil mirip Kenya — keasaman tajam blackcurrant dan citrus yang cerah.", brew:["v60"], machine:"V60"},
+  {name:"Kivu", origin:"mancanegara", region:"Republik Demokratik Kongo 🇨🇩", species:"arabika", type:"Arabika", acid:3, notes:["fruity","manis","floral"], desc:"Tumbuh di tepi Danau Kivu, fruity dan floral dengan manis alami, kopi specialty Afrika yang mulai naik daun.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Chiapas", origin:"mancanegara", region:"Meksiko 🇲🇽", species:"arabika", type:"Arabika", acid:3, notes:["cokelat","kacang","ringan"], desc:"Kopi organik dataran tinggi selatan Meksiko, ringan dengan rasa cokelat dan kacang yang lembut mirip kopi Amerika Tengah.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+
+  /* ===== TAMBAHAN BARU 4 — NUSANTARA ===== */
+  {name:"Ende", origin:"nusantara", region:"Ende, Flores, NTT 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["karamel","fruity"], desc:"Kopi Flores bagian tengah dekat Danau Kelimutu, manis karamel dengan sentuhan fruity yang lembut.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Pakpak Bharat", origin:"nusantara", region:"Pakpak Bharat, Sumatera Utara 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["earthy","citrus"], desc:"Kopi dataran tinggi dekat Danau Toba bagian barat, memadukan earthy khas Sumatera dengan keasaman citrus ringan.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Malino", origin:"nusantara", region:"Gowa, Sulawesi Selatan 🇮🇩", species:"arabika", type:"Arabika", acid:2, notes:["earthy","rempah","manis"], desc:"Kopi dataran tinggi dekat kawasan wisata Malino, earthy dengan rempah hangat dan manis alami khas Sulawesi.", brew:["frenchpress","tubruk"], machine:"French Press"},
+  {name:"Liberika Kubu Raya", origin:"nusantara", region:"Kubu Raya, Kalimantan Barat 🇮🇩", species:"liberika", type:"Liberika", acid:2, notes:["nangka","earthy"], desc:"Liberika lahan gambut Kalimantan Barat, memperluas peta liberika Indonesia di luar Riau dan Jambi, aroma nangka khas.", brew:["tubruk","frenchpress"], machine:"Tubruk / French Press"},
+
+  /* ===== TAMBAHAN BARU 4 — MANCANEGARA ===== */
+  {name:"Harar", origin:"mancanegara", region:"Ethiopia 🇪🇹", species:"arabika", type:"Arabika", acid:4, notes:["blueberry","wine","earthy"], desc:"Diproses secara kering (natural process), menghasilkan rasa fruity intens menyerupai anggur dan blueberry.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Antioquia", origin:"mancanegara", region:"Kolombia 🇨🇴", species:"arabika", type:"Arabika", acid:4, notes:["karamel","citrus","manis"], desc:"Wilayah penghasil kopi terbesar Kolombia, karamel manis berpadu keasaman citrus yang seimbang.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+  {name:"Mysore", origin:"mancanegara", region:"Karnataka, India 🇮🇳", species:"arabika", type:"Arabika", acid:2, notes:["nutty","rempah","earthy"], desc:"Salah satu kopi tertua di India ('Mysore Nuggets'), nutty dan earthy dengan sentuhan rempah khas kebun bercampur.", brew:["frenchpress","moka"], machine:"French Press / Moka Pot"},
+  {name:"Galapagos", origin:"mancanegara", region:"Kepulauan Galapagos, Ekuador 🇪🇨", species:"arabika", type:"Arabika", acid:3, notes:["fruity","manis","clean"], desc:"Kopi langka yang ditanam di Kepulauan Galapagos, fruity bersih dengan manis alami hasil tanah vulkanik unik.", brew:["v60"], machine:"V60"},
+
+  /* ===== TAMBAHAN BARU 5 — KEUNIKAN NUSANTARA ===== */
+  {name:"Kopi Lanang (Peaberry)", origin:"nusantara", region:"Banyuwangi, Jawa Timur 🇮🇩", species:"lainnya", type:"Peaberry", acid:2, notes:["kuat","pekat","langka"], desc:"Bukan varietas baru, melainkan biji tunggal bulat (peaberry) yang hanya tumbuh satu per buah ceri, bukan sepasang seperti biji kopi biasa. Rasanya lebih pekat dan dipercaya berkhasiat khusus dalam budaya lokal.", brew:["tubruk","frenchpress"], machine:"Tubruk / French Press"},
+  {name:"Puntang", origin:"nusantara", region:"Gunung Puntang, Bandung, Jawa Barat 🇮🇩", species:"arabika", type:"Arabika", acid:4, notes:["floral","fruity","honey"], desc:"Kopi specialty yang sempat menembus rekor lelang kopi dunia di Melbourne 2016, floral dan fruity dari proses honey yang khas.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+  {name:"Cikuray", origin:"nusantara", region:"Garut, Jawa Barat 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["citrus","manis","clean"], desc:"Tumbuh di lereng Gunung Cikuray, profilnya bersih dengan keasaman citrus segar dan rasa manis yang seimbang.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Kayumas", origin:"nusantara", region:"Situbondo, Jawa Timur 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["rempah","cokelat"], desc:"Kopi dataran tinggi lereng Gunung Argopuro sisi utara, rempah hangat berpadu cokelat dengan body medium.", brew:["v60","moka"], machine:"V60 / Moka Pot"},
+  {name:"Lampung Petik Merah", origin:"nusantara", region:"Lampung, Sumatera 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["manis","karamel","bersih"], desc:"Robusta kualitas premium dari ceri yang dipetik merah matang sempurna (bukan asalan), hasilnya lebih manis dan bersih dari robusta biasa.", brew:["moka","tubruk"], machine:"Moka Pot / Tubruk"},
+
+  /* ===== TAMBAHAN BARU 6 — NUSANTARA ===== */
+  {name:"Ternate", origin:"nusantara", region:"Ternate, Maluku Utara 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["earthy","rempah"], desc:"Tumbuh di kaki Gunung Gamalama, kawasan yang dulu terkenal sebagai pusat rempah dunia, kini juga menghasilkan robusta earthy dengan sentuhan rempah.", brew:["tubruk"], machine:"Tubruk"},
+  {name:"Belitung", origin:"nusantara", region:"Bangka Belitung 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["kuat","nutty"], desc:"Kopi pulau timah ini identik dengan budaya 'kopi kaki' pagi hari warga Belitung, kuat dengan sentuhan nutty yang khas.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+  {name:"Sikka", origin:"nusantara", region:"Maumere, Sikka, NTT 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["fruity","manis","clean"], desc:"Kopi Flores bagian timur dekat Maumere, fruity bersih dengan manis alami yang berbeda karakter dari Bajawa maupun Ende.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"Dieng", origin:"nusantara", region:"Dataran Tinggi Dieng, Jawa Tengah 🇮🇩", species:"arabika", type:"Arabika", acid:4, notes:["citrus","floral","dingin-segar"], desc:"Ditanam di salah satu dataran tertinggi Jawa, hawa dingin ekstremnya menghasilkan keasaman cerah dan aroma floral yang tajam.", brew:["v60","aeropress"], machine:"V60 / Aeropress"},
+
+  /* ===== TAMBAHAN BARU 7 ===== */
+  {name:"Sigararutang", origin:"nusantara", region:"Toba Samosir, Sumatera Utara 🇮🇩", species:"arabika", type:"Arabika", acid:3, notes:["earthy","herbal","manis"], desc:"Varietas arabika khas dataran tinggi Toba yang jadi tulang punggung kopi Lintong dan sekitarnya, body tebal dengan rasa manis herbal.", brew:["frenchpress","moka"], machine:"French Press / Moka Pot"},
+  {name:"Ateng", origin:"nusantara", region:"Aceh & Sumatera Utara 🇮🇩", species:"lainnya", type:"Hybrid Kerdil", acid:2, notes:["earthy","kuat","produktif"], desc:"Varietas hibrida berpostur kerdil (dwarf) yang mudah dibudidayakan dan produktif, banyak jadi tulang punggung kebun rakyat Gayo & Sumut.", brew:["tubruk","frenchpress"], machine:"Tubruk / French Press"},
+  {name:"Robusta Buleleng", origin:"nusantara", region:"Buleleng, Bali 🇮🇩", species:"robusta", type:"Robusta", acid:1, notes:["earthy","kuat","cokelat"], desc:"Sisi lain kopi Bali di luar arabika Kintamani yang lebih dikenal, robusta dataran rendah Bali utara dengan karakter kuat dan earthy.", brew:["tubruk","moka"], machine:"Tubruk / Moka Pot"},
+  {name:"Zambia", origin:"mancanegara", region:"Provinsi Utara, Zambia 🇿🇲", species:"arabika", type:"Arabika", acid:4, notes:["citrus","floral","clean"], desc:"Kopi Afrika yang belum banyak dikenal tapi punya profil cerah, citrus dan floral dengan rasa yang sangat bersih.", brew:["v60"], machine:"V60"},
+  {name:"Caranavi", origin:"mancanegara", region:"Bolivia 🇧🇴", species:"arabika", type:"Arabika", acid:3, notes:["manis","karamel","ringan"], desc:"Kopi dataran tinggi Andes Bolivia yang manis dan ringan, ditanam secara organik oleh petani kecil setempat.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+  {name:"São Tomé", origin:"mancanegara", region:"São Tomé dan Príncipe 🇸🇹", species:"arabika", type:"Arabika", acid:3, notes:["manis","fruity","langka"], desc:"Kopi langka dari negara kepulauan kecil Afrika yang secara historis pernah jadi salah satu penghasil kopi penting dunia.", brew:["v60","frenchpress"], machine:"V60 / French Press"},
+];
+
+const brewMethods = {
+  v60:{name:"V60 / Pour Over", desc:"Metode manual dengan aliran air perlahan, menonjolkan keasaman & kejernihan rasa.", coffee:15, mult:15, grind:"Sedang-halus", temp:"92–96°C", time:"2.5–3 menit",
+       steps:["Bloom 30 detik dengan 2x berat kopi air panas","Tuang perlahan memutar sampai target air","Biarkan menetes habis"]},
+  frenchpress:{name:"French Press", desc:"Rendam penuh (full immersion), menghasilkan body tebal dan rasa penuh.", coffee:20, mult:12, grind:"Kasar", temp:"93–96°C", time:"4 menit rendam",
+       steps:["Tuang air panas, aduk sebentar","Rendam 4 menit tanpa diaduk lagi","Tekan plunger perlahan"]},
+  aeropress:{name:"Aeropress", desc:"Cepat, bersih, fleksibel — cocok untuk bereksperimen dengan rasio.", coffee:15, mult:14, grind:"Sedang-halus", temp:"85–90°C", time:"1.5–2 menit",
+       steps:["Masukkan kopi & air, aduk 10 detik","Diamkan 1 menit","Tekan perlahan 20–30 detik"]},
+  moka:{name:"Moka Pot", desc:"Tekanan uap menghasilkan kopi pekat mirip espresso untuk di rumah.", coffee:18, mult:10, grind:"Halus (lebih kasar dari espresso)", temp:"Api sedang", time:"4–5 menit",
+       steps:["Isi chamber bawah air sampai batas katup","Isi basket kopi rata tanpa dipadatkan","Masak api sedang sampai terdengar 'mendesis'"]},
+  espresso:{name:"Mesin Espresso", desc:"Ekstraksi bertekanan tinggi (~9 bar), dasar dari latte, cappuccino, dll.", coffee:18, mult:2, grind:"Sangat halus", temp:"90–96°C", time:"25–30 detik",
+       steps:["Tamping rata dengan tekanan konsisten","Ekstrak sampai crema keemasan muncul","Hentikan di rasio 1:2 (18g → 36g)"]},
+  coldbrew:{name:"Cold Brew", desc:"Rendam dingin lama, hasilnya smooth, rendah asam, tahan lama di kulkas.", coffee:100, mult:8, grind:"Kasar", temp:"Suhu ruang/dingin", time:"12–18 jam rendam",
+       steps:["Campur kopi & air dingin dalam wadah","Rendam di kulkas 12–18 jam","Saring dengan filter/kain"]},
+  phin:{name:"Phin Vietnam", desc:"Tetes lambat gaya Vietnam, biasa dipadukan susu kental manis.", coffee:25, mult:8, grind:"Sedang-kasar", temp:"95°C", time:"4–5 menit menetes",
+       steps:["Tuang sedikit air untuk bloom","Isi penuh, tutup dengan penekan","Biarkan menetes habis ke gelas"]},
+  tubruk:{name:"Tubruk (Tradisional)", desc:"Cara paling sederhana khas Indonesia: bubuk kopi diseduh langsung tanpa disaring.", coffee:15, mult:12, grind:"Halus-sedang", temp:"Air mendidih", time:"3–4 menit endap",
+       steps:["Tuang air mendidih langsung ke bubuk kopi","Aduk sebentar","Tunggu ampas mengendap sebelum diminum"]},
+  chemex:{name:"Chemex", desc:"Pour over gaya Amerika dengan filter tebal, hasilnya sangat bersih dan ringan.", coffee:30, mult:17, grind:"Sedang-kasar", temp:"92–96°C", time:"4–5 menit",
+       steps:["Lipat filter Chemex 3 lapis di satu sisi, basahi dengan air panas","Bloom 45 detik dengan 2x berat kopi air panas","Tuang perlahan bertahap sampai total air tercapai"]},
+  syphon:{name:"Syphon / Vacuum Pot", desc:"Metode teatrikal pakai tekanan uap, menghasilkan rasa sangat bersih dan aromatik.", coffee:20, mult:13, grind:"Sedang", temp:"Air mendidih", time:"1.5–2 menit di atas api",
+       steps:["Panaskan air di bola bawah sampai naik ke tabung atas","Masukkan kopi giling, aduk perlahan 45 detik","Matikan api, kopi akan turun kembali ke bola bawah melewati filter"]},
+  turkish:{name:"Turkish Coffee (Ibrik)", desc:"Kopi digiling sangat halus dan dimasak langsung bersama air, disajikan dengan ampasnya.", coffee:7, mult:9, grind:"Sangat halus (seperti tepung)", temp:"Dipanaskan bertahap dari dingin", time:"4–5 menit",
+       steps:["Campur kopi sangat halus + gula secukupnya + air dingin dalam ibrik","Panaskan perlahan sampai berbusa naik, angkat sebelum mendidih penuh","Ulangi panaskan-angkat 2–3 kali, tuang perlahan termasuk buihnya"]},
+  coldrip:{name:"Cold Drip (Kyoto Style)", desc:"Air dingin/es menetes perlahan selama berjam-jam, hasilnya sangat halus dan rendah asam.", coffee:40, mult:12, grind:"Sedang-kasar", temp:"Air es/dingin", time:"4–8 jam menetes",
+       steps:["Isi tabung atas dengan es batu dan air dingin","Atur kecepatan tetes ke kopi giling di tengah, sekitar 1 tetes/detik","Tampung hasil tetesan selama 4–8 jam di wadah bawah"]},
+  percolator:{name:"Percolator", desc:"Air mendidih bersirkulasi berulang melewati kopi, gaya klasik kemah/rumah lama.", coffee:20, mult:12, grind:"Kasar", temp:"Mendidih di dalam alat", time:"8–10 menit",
+       steps:["Isi bagian bawah percolator dengan air","Masukkan kopi kasar ke keranjang saring di atasnya","Panaskan sampai air mendidih dan bersirkulasi 8–10 menit"]},
+  kalita:{name:"Kalita Wave", desc:"Pour over dengan dasar flat & 3 lubang kecil, aliran air lebih merata dan konsisten dibanding V60.", coffee:20, mult:15, grind:"Sedang", temp:"92–96°C", time:"3 menit",
+       steps:["Basahi filter wave dengan air panas hingga rata","Bloom 30 detik dengan 2x berat kopi air panas","Tuang perlahan memutar sampai target air tercapai"]},
+  batchbrew:{name:"Coffee Maker Listrik", desc:"Mesin drip otomatis rumahan/kantor, praktis untuk menyeduh banyak cangkir sekaligus.", coffee:60, mult:16, grind:"Sedang", temp:"Otomatis ±93°C", time:"5–6 menit",
+       steps:["Isi tangki air sesuai jumlah cangkir yang diinginkan","Masukkan kopi giling sedang ke filter mesin","Nyalakan mesin dan tunggu proses seduh otomatis selesai"]},
+  clever:{name:"Clever Dripper", desc:"Menggabungkan rendam penuh seperti French Press dengan hasil bersih seperti pour over, praktis untuk pemula.", coffee:15, mult:15, grind:"Sedang", temp:"92–96°C", time:"3–4 menit rendam",
+       steps:["Tuang kopi & air panas langsung, aduk sebentar","Pasang penutup dan biarkan rendam 3–4 menit","Letakkan di atas cangkir, katup otomatis terbuka dan kopi menetes"]},
+  cupping:{name:"Cupping (Uji Cita Rasa)", desc:"Metode standar profesional untuk menilai aroma & rasa kopi secara objektif, bukan untuk minum harian.", coffee:12, mult:18, grind:"Sedang-kasar", temp:"93°C", time:"4 menit",
+       steps:["Tuang air panas ke bubuk kopi kering, biarkan 4 menit","Pecah 'crust' yang terbentuk di permukaan dengan sendok","Seruput dengan suara keras agar aroma menyebar ke seluruh mulut"]},
+  neldrip:{name:"Nel Drip (Flanel)", desc:"Pour over gaya Jepang memakai filter kain flanel, menghasilkan body lebih tebal dan rasa lebih halus dibanding kertas.", coffee:20, mult:14, grind:"Sedang", temp:"85–90°C", time:"3 menit",
+       steps:["Basahi & peras kain flanel sebelum dipakai","Tuang air panas perlahan memutar seperti menyeduh V60","Simpan flanel terendam air dingin agar awet untuk pemakaian berikutnya"]},
+  sandcoffee:{name:"Kopi Pasir (Ibrik Pasir)", desc:"Teknik memasak kopi Turki di atas pasir panas, memberi kontrol suhu yang sangat presisi dan merata.", coffee:10, mult:8, grind:"Sangat halus (bubuk)", temp:"Pasir panas ±120–150°C", time:"5–8 menit",
+       steps:["Panaskan wadah berisi pasir hingga sangat panas","Benamkan ibrik kecil berisi kopi & air ke dalam pasir panas","Angkat begitu muncul buih pertama, ulangi 2–3 kali"]},
+  origami:{name:"Origami Dripper", desc:"Dripper serbaguna asal Jepang dengan lekukan kipas yang fleksibel dipakai dengan berbagai jenis filter dan gaya tuang.", coffee:18, mult:15, grind:"Sedang", temp:"90–94°C", time:"2.5–3 menit",
+       steps:["Basahi filter, pasang di dripper","Bloom 30 detik dengan air panas 2x berat kopi","Tuang bertahap mengikuti pola kipas dripper"]},
+  switchdripper:{name:"Hario Switch", desc:"Dripper hybrid dengan katup di bawah — bisa dipakai rendam (immersion) atau pour over biasa tinggal digeser katupnya.", coffee:20, mult:15, grind:"Sedang", temp:"90–96°C", time:"3 menit",
+       steps:["Tutup katup, isi kopi & air, rendam 2 menit","Aduk perlahan sekali saja","Buka katup, biarkan menetes seperti pour over biasa"]},
+};
+
+const machines = [
+  {icon:"🫖", name:"Kettle Leher Angsa + Dripper V60", desc:"Kombinasi wajib untuk pour over presisi — kettle memberi kontrol aliran air.", tags:["V60","Manual"]},
+  {icon:"🥃", name:"French Press", desc:"Alat serbaguna, mudah dibawa, hasil body tebal tanpa listrik.", tags:["French Press","Traveling"]},
+  {icon:"💉", name:"Aeropress", desc:"Ringkas dan cepat, favorit untuk seduh personal & saat bepergian.", tags:["Aeropress","Praktis"]},
+  {icon:"🔥", name:"Moka Pot (Stovetop)", desc:"Alat klasik Italia untuk rasa pekat ala espresso tanpa mesin mahal.", tags:["Moka Pot","Espresso-like"]},
+  {icon:"⚙️", name:"Mesin Espresso Semi-Otomatis", desc:"Investasi utama untuk pecinta latte/cappuccino harian di rumah.", tags:["Espresso","Milk-based"]},
+  {icon:"🧊", name:"Cold Brew Jar / Tower", desc:"Wadah rendam khusus dengan filter bawaan untuk kopi dingin harian.", tags:["Cold Brew","Stok mingguan"]},
+  {icon:"🇻🇳", name:"Phin Vietnam", desc:"Alat tetes logam kecil, murah dan ikonik untuk kopi susu Vietnam.", tags:["Phin","Kopi Susu"]},
+  {icon:"⚙️", name:"Grinder (Manual/Elektrik)", desc:"Alat pendukung wajib — gilingan segar sangat memengaruhi rasa akhir apa pun metodenya.", tags:["Pendukung","Wajib punya"]},
+  {icon:"🏺", name:"Chemex", desc:"Dripper kaca ikonik dengan filter tebal bawaan, hasil seduhan sangat bersih dan ringan.", tags:["Chemex","Tampilan meja"]},
+  {icon:"⏳", name:"Syphon / Vacuum Pot", desc:"Alat kaca dua tabung dengan pemanas, proses seduhnya teatrikal dan jadi daya tarik tersendiri.", tags:["Syphon","Teatrikal"]},
+  {icon:"🫖", name:"Ibrik / Cezve", desc:"Panci kecil bergagang panjang untuk memasak kopi Turki langsung bersama air dan gula.", tags:["Turkish Coffee","Tradisional"]},
+  {icon:"💧", name:"Cold Drip Tower", desc:"Menara kaca bertingkat yang meneteskan air dingin perlahan selama berjam-jam ke kopi giling.", tags:["Cold Drip","Stok premium"]},
+  {icon:"🏕️", name:"Percolator", desc:"Panci klasik dengan sirkulasi air mendidih berulang, favorit untuk berkemah atau gaya rumah lama.", tags:["Percolator","Outdoor"]},
+  {icon:"🌊", name:"Kalita Wave Dripper", desc:"Dripper flat-bottom dengan 3 lubang kecil, memberi ekstraksi lebih merata dan konsisten dibanding V60.", tags:["Kalita Wave","Konsisten"]},
+  {icon:"🔌", name:"Coffee Maker Listrik", desc:"Mesin drip otomatis untuk menyeduh banyak cangkir sekaligus, praktis untuk rumah atau kantor.", tags:["Batch Brew","Praktis"]},
+  {icon:"🧡", name:"Clever Dripper", desc:"Dripper dengan katup di bawah, memadukan kepraktisan rendam penuh dengan hasil bersih pour over.", tags:["Clever Dripper","Ramah pemula"]},
+  {icon:"🥄", name:"Cupping Bowl & Sendok", desc:"Mangkuk dan sendok khusus untuk menilai aroma serta rasa kopi secara profesional ala Q-Grader.", tags:["Cupping","Profesional"]},
+  {icon:"🧵", name:"Nel Drip Set (Filter Flanel)", desc:"Dripper dengan filter kain flanel yang bisa dipakai berulang, menghasilkan body lebih tebal dan rasa lebih halus.", tags:["Nel Drip","Ramah lingkungan"]},
+  {icon:"🏖️", name:"Ibrik Pasir & Wadah Pasir", desc:"Set memasak kopi Turki tradisional di atas pasir panas untuk kontrol suhu yang sangat presisi.", tags:["Kopi Pasir","Unik"]},
+  {icon:"🎏", name:"Origami Dripper", desc:"Dripper serbaguna dari Jepang yang fleksibel dipakai dengan berbagai jenis filter dan gaya tuang.", tags:["Origami","Serbaguna"]},
+  {icon:"🔀", name:"Hario Switch", desc:"Dripper hybrid dengan katup geser, bisa berfungsi sebagai immersion brewer maupun pour over biasa.", tags:["Hario Switch","2-in-1"]},
+];
+
+const drinks = [
+  {kind:"mesin", icon:"☕", name:"Espresso", comp:"18g kopi → 36ml shot murni", desc:"Dasar dari semua minuman berbasis mesin — pekat, bercrema keemasan, disajikan dalam sajian kecil.",
+   steps:["Giling kopi sangat halus, isi portafilter 18g","Tamping rata dengan tekanan konsisten","Ekstrak 25–30 detik sampai crema keemasan muncul, berhenti di 36ml"]},
+  {kind:"mesin", icon:"🔻", name:"Ristretto", comp:"18g kopi → ±18–20ml (short shot)", desc:"Ekstraksi dihentikan lebih awal dari espresso, hasilnya lebih pekat dan cenderung lebih manis.",
+   steps:["Siapkan seperti espresso, 18g kopi digiling halus","Ekstrak namun hentikan lebih cepat, sekitar 15–20 detik","Hasil ±18–20ml, lebih pekat & manis dari espresso biasa"]},
+  {kind:"mesin", icon:"🔺", name:"Lungo", comp:"18g kopi → ±50–60ml (long shot)", desc:"Ekstraksi diperpanjang dari espresso, rasa lebih ringan dengan sedikit tambahan pahit.",
+   steps:["Siapkan seperti espresso","Biarkan air mengalir lebih lama, ±35–40 detik","Hasil ±50–60ml dengan rasa lebih ringan"]},
+  {kind:"mesin", icon:"⏺️", name:"Doppio", comp:"2× shot espresso (36g → 72ml)", desc:"Dua shot espresso dalam satu sajian, sering jadi basis untuk minuman susu porsi besar.",
+   steps:["Gunakan basket portafilter untuk dua shot (36g kopi)","Tamping rata","Ekstrak sampai 72ml, sajikan dalam satu cangkir"]},
+  {kind:"mesin", icon:"🖤", name:"Long Black", comp:"Air panas dulu, espresso dituang di atasnya", desc:"Crema tetap terjaga karena espresso dituang belakangan, rasa lebih ringan dari americano.",
+   steps:["Isi cangkir dengan air panas ±120ml","Tarik 1 shot espresso terpisah","Tuang espresso perlahan di atas air agar crema tetap terlihat"]},
+  {kind:"mesin", icon:"🌊", name:"Americano", comp:"1 shot espresso + air panas (±1:2)", desc:"Espresso dituang lebih dulu lalu ditambah air panas, mirip kopi hitam biasa dari basis espresso.",
+   steps:["Tarik 1 shot espresso ke dalam cangkir","Tambahkan air panas dengan rasio ±1:2","Aduk ringan sebelum disajikan"]},
+  {kind:"mesin", icon:"🥛", name:"Latte", comp:"1 shot espresso + susu steamed + foam tipis", desc:"Rasio susu paling banyak di antara minuman espresso-susu, creamy dan lembut, favorit untuk latte art.",
+   steps:["Tarik 1 shot espresso ke dalam cangkir besar","Steam susu hingga microfoam halus (±60–65°C)","Tuang susu perlahan membentuk lapisan foam tipis di atas"]},
+  {kind:"mesin", icon:"🫧", name:"Cappuccino", comp:"Espresso + susu steamed + foam (rasio 1:1:1)", desc:"Foam lebih tebal dari latte sehingga rasa kopinya lebih terasa di setiap tegukan.",
+   steps:["Tarik 1 shot espresso","Steam susu dengan foam lebih tebal dari latte","Tuang dengan rasio kopi:susu:foam kurang lebih 1:1:1"]},
+  {kind:"mesin", icon:"⚪", name:"Flat White", comp:"Double ristretto + microfoam susu tipis", desc:"Rasa kopi lebih kuat dari latte karena pakai ristretto, teksturnya sangat halus dan velvety.",
+   steps:["Tarik double ristretto (±36ml dari 2 shot pendek)","Steam susu jadi microfoam sangat halus, minim buih besar","Tuang susu perlahan hingga permukaan mengkilap velvety"]},
+  {kind:"mesin", icon:"🔘", name:"Macchiato", comp:"Espresso + sedikit foam susu di atasnya", desc:"Artinya 'bernoda' — hanya setitik foam susu di atas espresso, rasa kopi sangat dominan.",
+   steps:["Tarik 1 shot espresso ke cangkir kecil","Steam sedikit susu hingga berbusa","Tambahkan hanya 1 sendok foam susu di atas espresso"]},
+  {kind:"mesin", icon:"◐", name:"Cortado", comp:"Espresso + susu steamed (rasio 1:1)", desc:"Menyeimbangkan rasa pahit espresso dengan susu tanpa membuatnya terlalu creamy seperti latte.",
+   steps:["Tarik 1 shot espresso","Steam susu tanpa foam berlebih","Tuang susu dengan rasio 1:1 terhadap espresso"]},
+  {kind:"mesin", icon:"🤏", name:"Piccolo Latte", comp:"Ristretto + susu steamed, cangkir kecil", desc:"Versi mini dari latte, rasa kopinya terasa lebih pekat karena memakai basis ristretto.",
+   steps:["Tarik 1 shot ristretto ke cangkir kecil (~100ml)","Steam susu jadi microfoam halus","Tuang susu perlahan sampai penuh"]},
+  {kind:"mesin", icon:"🍫", name:"Mocha", comp:"Espresso + cokelat + susu steamed", desc:"Perpaduan kopi dan cokelat yang manis dan creamy, biasa ditambah whipped cream.",
+   steps:["Masukkan saus cokelat ke dasar cangkir","Tarik 1 shot espresso, aduk dengan cokelat","Tambahkan susu steamed dan foam, opsional whipped cream di atas"]},
+  {kind:"mesin", icon:"🍨", name:"Affogato", comp:"1 shot espresso panas dituang di atas es krim vanila", desc:"Lebih ke sajian dessert — kontras panas dan dingin dalam satu mangkuk kecil.",
+   steps:["Letakkan 1–2 scoop es krim vanila di mangkuk kecil","Tarik 1 shot espresso panas","Tuang espresso langsung di atas es krim, sajikan segera"]},
+  {kind:"mesin", icon:"🍦", name:"Vienna Coffee", comp:"Espresso/kopi hitam + whipped cream tebal di atas", desc:"Gaya Austria klasik, manis dan creamy tanpa perlu diaduk susu ke dalam kopi.",
+   steps:["Seduh espresso atau kopi hitam pekat ke cangkir","Kocok whipped cream hingga kental","Sendokkan whipped cream tebal di atas kopi, jangan diaduk"]},
+  {kind:"mesin", icon:"🌰", name:"Mont Blanc Coffee", comp:"Espresso/latte + krim kastanye manis di atasnya", desc:"Minuman spesial terinspirasi dessert Mont Blanc, populer di kafe-kafe gaya Jepang & Korea.",
+   steps:["Siapkan espresso atau latte sebagai dasar","Kocok krim kastanye (chestnut cream) hingga lembut","Bentuk krim kastanye di atas kopi menggunakan piping bag"]},
+  {kind:"manual", icon:"🏺", name:"Kopi Tubruk", comp:"Bubuk kopi halus + air mendidih, langsung diseduh", desc:"Cara paling klasik di Indonesia — kental, penuh ampas, diminum sambil menunggu bubuknya mengendap.",
+   steps:["Masukkan 1–2 sdm bubuk kopi halus ke gelas","Tuang air mendidih langsung ke bubuk kopi","Tunggu 3–4 menit sampai ampas mengendap sebelum diminum"]},
+  {kind:"manual", icon:"🧊", name:"Es Kopi Susu Gula Aren", comp:"Kopi (umumnya robusta) + susu + gula aren cair, disajikan dingin", desc:"Gaya kopi kekinian Indonesia, manis legit dari gula aren dan creamy dari susu segar.",
+   steps:["Seduh kopi pekat (espresso atau tubruk disaring)","Tuang gula aren cair ke dasar gelas berisi es","Tuang kopi lalu susu segar, aduk sebelum diminum"]},
+  {kind:"manual", icon:"🔥", name:"Kopi Joss", comp:"Kopi tubruk panas + arang membara dicelupkan", desc:"Khas angkringan Yogyakarta — arang memberi aroma smoky dan dipercaya menetralkan asam lambung.",
+   steps:["Seduh kopi tubruk panas seperti biasa","Siapkan bara arang kayu yang benar-benar membara","Celupkan arang ke dalam gelas kopi selama beberapa detik lalu angkat"]},
+  {kind:"manual", icon:"🥚", name:"Kopi Talua", comp:"Kopi + kuning telur dikocok berbusa + gula", desc:"Minuman khas Sumatera Barat, creamy dan berbusa tanpa tambahan susu sama sekali.",
+   steps:["Kocok kuning telur dengan gula hingga putih & berbusa","Seduh kopi pekat panas terpisah","Tuang kopi panas ke kocokan telur sambil terus diaduk cepat"]},
+  {kind:"manual", icon:"🍮", name:"Cà Phê Trứng (Kopi Telur Vietnam)", comp:"Kopi robusta pekat + kuning telur kocok + gula + susu kental", desc:"Teksturnya lembut seperti tiramisu cair, disajikan hangat maupun dingin di atas kopi pekat.",
+   steps:["Seduh kopi robusta pekat dengan phin","Kocok kuning telur, gula, dan susu kental manis hingga kental berbusa","Tuang campuran telur di atas kopi panas, sajikan segera"]},
+  {kind:"manual", icon:"🔁", name:"Kopi Tarik", comp:"Kopi + susu kental manis, 'ditarik' bolak-balik antar wadah", desc:"Teknik menarik cairan dari ketinggian menghasilkan busa halus, populer di Malaysia & Indonesia.",
+   steps:["Campurkan kopi pekat dengan susu kental manis dalam satu wadah","Tuang bolak-balik dari ketinggian antara dua wadah/gelas","Ulangi beberapa kali sampai muncul busa halus di permukaan"]},
+
+  /* ===== TAMBAHAN BARU — MESIN ===== */
+  {kind:"mesin", icon:"🤍", name:"Con Panna", comp:"1 shot espresso + seujung whipped cream di atasnya", desc:"Sajian singkat khas Italia — espresso pekat dengan sentuhan manis krim kocok, tanpa susu.",
+   steps:["Tarik 1 shot espresso ke cangkir kecil","Kocok whipped cream hingga kental","Sendokkan whipped cream secukupnya di atas espresso, sajikan segera"]},
+  {kind:"mesin", icon:"👁️", name:"Red Eye (Shot in the Dark)", comp:"Kopi hitam drip + 1 shot espresso", desc:"Kopi hitam biasa yang diberi tambahan 1 shot espresso untuk dorongan kafein ekstra, favorit anak kuliahan Amerika.",
+   steps:["Seduh kopi hitam drip/filter seperti biasa ke cangkir besar","Tarik 1 shot espresso terpisah","Tuang espresso ke dalam kopi hitam, aduk ringan"]},
+  {kind:"mesin", icon:"🍫", name:"Bicerin", comp:"Cokelat panas + espresso + krim kocok, disusun berlapis", desc:"Minuman berlapis khas Turin, Italia — cokelat, kopi, dan krim yang sengaja tidak diaduk agar terlihat cantik.",
+   steps:["Tuang cokelat panas kental ke dasar gelas bening","Tuang 1 shot espresso perlahan di atasnya tanpa diaduk","Tambahkan lapisan krim kocok di paling atas"]},
+
+  /* ===== TAMBAHAN BARU — MANUAL/TRADISIONAL ===== */
+  {kind:"manual", icon:"🫘", name:"Kopi Turki (Kahve)", comp:"Kopi sangat halus dimasak bersama air & gula dalam ibrik", desc:"Kopi tertua di dunia dari Timur Tengah, disajikan hangat lengkap dengan ampasnya di dasar cangkir.",
+   steps:["Campur kopi sangat halus, gula, dan air dingin dalam ibrik","Panaskan perlahan sampai berbusa, angkat sebelum mendidih penuh","Tuang ke cangkir kecil termasuk buihnya, biarkan ampas mengendap sebelum diminum"]},
+  {kind:"manual", icon:"🧊", name:"Cà Phê Sữa Đá", comp:"Kopi robusta pekat dari phin + susu kental manis + es", desc:"Kopi susu es khas Vietnam, manis legit dan pekat — beda dari versi telur yang lebih creamy.",
+   steps:["Seduh kopi robusta pekat menggunakan phin","Tuang susu kental manis ke dasar gelas berisi es batu","Tuang kopi panas di atasnya, aduk sebelum diminum"]},
+  {kind:"manual", icon:"🥶", name:"Frappé", comp:"Kopi instan + air dingin + es, dikocok sampai berbusa", desc:"Kopi dingin khas Yunani, dikocok (bukan diblender) sampai muncul busa tebal di permukaan.",
+   steps:["Masukkan kopi instan, gula, dan sedikit air dingin ke shaker","Kocok kuat sampai muncul busa tebal keemasan","Tuang ke gelas berisi es, tambahkan air/susu sesuai selera"]},
+  {kind:"manual", icon:"🫚", name:"Kopi Jahe", comp:"Kopi tubruk + rebusan jahe + gula merah", desc:"Kopi rempah khas Nusantara yang menghangatkan badan, populer di daerah pegunungan & musim hujan.",
+   steps:["Rebus jahe geprek dengan sedikit air dan gula merah","Seduh kopi tubruk secara terpisah","Campurkan air jahe ke dalam kopi, aduk rata dan sajikan hangat"]},
+  {kind:"manual", icon:"🥥", name:"Es Kopi Kelapa", comp:"Kopi pekat + santan/air kelapa muda + gula aren", desc:"Tren kopi kekinian Indonesia yang menyegarkan, memadukan gurihnya kelapa dengan pekatnya kopi.",
+   steps:["Seduh kopi pekat (espresso atau tubruk yang disaring)","Isi gelas dengan es, santan/air kelapa muda, dan gula aren cair","Tuang kopi di atasnya, aduk sebelum diminum"]},
+
+  /* ===== TAMBAHAN BARU 2 — MESIN ===== */
+  {kind:"mesin", icon:"🍫", name:"Marocchino", comp:"Espresso + sedikit foam susu + taburan cokelat dalam gelas kecil", desc:"Minuman kecil khas Italia utara, mirip cappuccino mini dengan sentuhan cokelat bubuk di atasnya.",
+   steps:["Tarik 1 shot espresso ke gelas kecil","Tambahkan sedikit foam susu di atasnya","Taburi cokelat bubuk tipis sebagai sentuhan akhir"]},
+  {kind:"mesin", icon:"🥃", name:"Caffè Corretto", comp:"Espresso + setetes minuman keras (grappa/brandy)", desc:"Espresso khas Italia yang 'dikoreksi' dengan setetes minuman keras, populer sebagai penutup makan malam orang dewasa.",
+   steps:["Tarik 1 shot espresso ke cangkir kecil","Tambahkan setetes grappa atau brandy sesuai selera","Aduk ringan dan sajikan hangat"]},
+  {kind:"mesin", icon:"💨", name:"Nitro Cold Brew", comp:"Cold brew diinfus gas nitrogen bertekanan", desc:"Cold brew yang dialiri gas nitrogen sehingga teksturnya creamy berbusa seperti bir stout, tanpa tambahan susu.",
+   steps:["Siapkan cold brew pekat yang sudah disaring","Alirkan melalui keran khusus berinfus gas nitrogen","Tuang dan biarkan busa creamy terbentuk di permukaan"]},
+  {kind:"mesin", icon:"🖤", name:"Dirty Coffee", comp:"Susu dingin di dasar gelas + espresso panas dituang di atasnya", desc:"Tren kekinian — espresso panas dituang di atas susu dingin, dibiarkan bercampur perlahan saat diminum.",
+   steps:["Isi gelas berisi es dengan susu dingin","Tarik 1–2 shot espresso panas","Tuang espresso perlahan di atas susu tanpa diaduk"]},
+
+  /* ===== TAMBAHAN BARU 2 — MANUAL/TRADISIONAL ===== */
+  {kind:"manual", icon:"🌿", name:"Kopi Rarobang", comp:"Kopi + rempah (jahe, cengkih, kayu manis) + kacang kenari", desc:"Kopi rempah tradisional khas Ambon, Maluku, menghangatkan badan dengan taburan kacang kenari di atasnya.",
+   steps:["Rebus rempah (jahe, cengkih, kayu manis) dengan air","Seduh bubuk kopi dengan air rempah tersebut","Sajikan hangat dengan taburan kacang kenari cincang"]},
+  {kind:"manual", icon:"🍃", name:"Kopi Pandan Kekinian", comp:"Kopi + air rebusan daun pandan + susu + gula aren", desc:"Variasi kopi kekinian Indonesia dengan aroma pandan yang harum berpadu manis gula aren.",
+   steps:["Rebus daun pandan dengan sedikit air hingga harum","Seduh kopi pekat secara terpisah","Campurkan air pandan, kopi, susu, dan gula aren, aduk rata"]},
+
+  /* ===== TAMBAHAN BARU 3 — MESIN & MANUAL ===== */
+  {kind:"mesin", icon:"🧊", name:"Iced Americano", comp:"1–2 shot espresso + air dingin + es batu", desc:"Versi dingin dari americano, ringan dan menyegarkan, salah satu menu paling laris di kafe.",
+   steps:["Isi gelas dengan es batu hingga penuh","Tuang air dingin secukupnya","Tarik shot espresso dan tuang di atasnya"]},
+  {kind:"manual", icon:"🥃", name:"Irish Coffee", comp:"Kopi hitam panas + gula + sedikit whiskey + lapisan krim kental di atas", desc:"Minuman klasik Irlandia untuk orang dewasa, kopi hangat berpadu whiskey dengan lapisan krim lembut mengapung di atasnya.",
+   steps:["Seduh kopi hitam panas, tambahkan gula, aduk rata","Tambahkan sedikit whiskey ke dalam kopi","Tuang krim kental perlahan di atas punggung sendok agar mengapung"]},
+  {kind:"manual", icon:"🍈", name:"Kopi Durian", comp:"Kopi pekat + daging durian + susu kental manis", desc:"Tren kopi Nusantara yang memadukan aroma kuat durian dengan pekatnya kopi, disukai pencinta durian.",
+   steps:["Haluskan daging durian dengan sedikit susu kental manis","Seduh kopi pekat secara terpisah","Campurkan kopi ke dalam campuran durian, aduk atau sajikan berlapis"]},
+  {kind:"manual", icon:"⚫", name:"Kopi O", comp:"Kopi robusta disangrai dengan margarin/gula + gula, tanpa susu", desc:"Kopi hitam khas Malaysia & Singapura, disangrai bersama margarin dan gula sehingga rasanya karamel dan sedikit smoky.",
+   steps:["Seduh bubuk kopi sangrai khas (roasted dengan margarin/gula)","Saring ampasnya dengan kain khusus","Tambahkan gula secukupnya tanpa susu, sajikan panas"]},
+
+  /* ===== TAMBAHAN BARU 4 — MESIN & MANUAL ===== */
+  {kind:"manual", icon:"🥛", name:"Café au Lait", comp:"Kopi seduh drip/tubruk + susu panas (rasio 1:1), tanpa espresso", desc:"Gaya Prancis klasik — bukan berbasis espresso, dibuat dari kopi seduh biasa dicampur susu panas dalam mangkuk besar.",
+   steps:["Seduh kopi hitam pekat dengan metode drip/tubruk","Panaskan susu hingga hampir mendidih","Tuang kopi dan susu panas bersamaan secara merata ke mangkuk"]},
+  {kind:"mesin", icon:"☁️", name:"Cold Foam Coffee", comp:"Kopi/cold brew dingin + lapisan foam susu dingin dikocok tanpa panas", desc:"Tren kekinian — foam susu dikocok dingin (tanpa steam) hingga lembut, dituang di atas kopi dingin sebagai lapisan creamy.",
+   steps:["Siapkan kopi dingin atau cold brew sebagai dasar","Kocok susu dingin dengan frother tangan hingga berbusa lembut","Tuang foam dingin di atas kopi tanpa diaduk"]},
+  {kind:"manual", icon:"🥛", name:"Kopi Sanger", comp:"Kopi tubruk pekat + susu kental manis, ditarik hingga berbusa", desc:"Minuman legendaris khas Aceh, kopi kental ditarik bersama susu kental manis sampai berbusa lembut di permukaan.",
+   steps:["Seduh kopi robusta/arabika pekat dengan saringan kain","Tambahkan susu kental manis ke dalam kopi panas","Tarik bolak-balik antar dua wadah hingga berbusa, sajikan hangat"]},
+  {kind:"mesin", icon:"🧊", name:"Freddo Espresso", comp:"Espresso dikocok dengan es hingga berbusa, disajikan dingin tanpa susu", desc:"Gaya Yunani — espresso segar dikocok cepat dengan es batu sampai berbusa lembut, ringan dan menyegarkan tanpa susu.",
+   steps:["Tarik 1–2 shot espresso panas","Tuang ke shaker berisi es batu, kocok cepat hingga berbusa","Saring ke gelas berisi es baru dan sajikan segera"]},
+
+  /* ===== TAMBAHAN BARU 5 — MANUAL & MESIN UNIK ===== */
+  {kind:"manual", icon:"🖌️", name:"Kopi Lelet", comp:"Kopi tubruk kental, ampasnya dioleskan ke batang rokok sebagai tradisi", desc:"Tradisi unik khas Lasem, Rembang — ampas kopi yang kental dilukiskan ke batang rokok sebagai bagian dari budaya ngopi santai setempat.",
+   steps:["Seduh kopi tubruk sangat kental hingga ampasnya pekat","Nikmati kopinya seperti tubruk biasa","Ampas yang tersisa dioleskan tipis sebagai tradisi lokal, bukan untuk diminum"]},
+  {kind:"manual", icon:"🔥", name:"Kopi Klotok", comp:"Kopi + gula + jahe direbus bersama air dalam kendil tanah liat di atas tungku kayu bakar", desc:"Gaya seduh tradisional Yogyakarta, direbus perlahan dalam kendil tanah liat sehingga rasanya lebih smoky dan hangat.",
+   steps:["Rebus air dalam kendil tanah liat di atas tungku kayu bakar","Masukkan bubuk kopi, gula, dan jahe, rebus bersama beberapa menit","Saring dan sajikan panas dalam gelas"]},
+  {kind:"mesin", icon:"🇨🇺", name:"Cafecito Cubano", comp:"Espresso diseduh bersama gula pasir, dikocok hingga berbusa (espuma)", desc:"Gaya Kuba — gula dicampur sejak awal ekstraksi lalu dikocok cepat membentuk busa manis (espuma) di atas espresso pekat.",
+   steps:["Masukkan gula pasir ke wadah penampung shot espresso","Tarik espresso langsung menetes ke atas gula","Kocok cepat campuran gula & sedikit espresso hingga berbusa, tuang kembali ke sisa espresso"]},
+
+  /* ===== TAMBAHAN BARU 6 ===== */
+  {kind:"manual", icon:"🌶️", name:"Bandrek Kopi", comp:"Kopi + rebusan jahe, kayu manis, serai, gula aren, dan sedikit santan", desc:"Perpaduan kopi dengan bandrek khas Sunda yang hangat dan pedas rempah, favorit di kawasan dataran tinggi Jawa Barat saat musim hujan.",
+   steps:["Rebus jahe, kayu manis, serai, dan gula aren hingga harum","Seduh kopi pekat secara terpisah","Campurkan air rempah panas dengan kopi dan sedikit santan, aduk rata"]},
+  {kind:"mesin", icon:"🍼", name:"Babyccino", comp:"Susu steamed berbusa lembut tanpa kopi sama sekali, ditaburi cokelat bubuk", desc:"Versi 'cappuccino' ramah anak — hanya foam susu hangat tanpa kafein, biar anak-anak bisa ikut merasakan serunya ritual ngopi keluarga.",
+   steps:["Steam susu hingga berbusa lembut tanpa espresso","Tuang ke cangkir kecil","Taburi sedikit cokelat bubuk di atasnya"]},
+
+  /* ===== TAMBAHAN BARU 7 ===== */
+  {kind:"mesin", icon:"🥛", name:"Breve", comp:"Espresso + half-and-half (campuran susu & krim) steamed, bukan susu biasa", desc:"Gaya Amerika yang lebih creamy dari latte biasa karena memakai half-and-half, bukan susu murni.",
+   steps:["Tarik 1-2 shot espresso","Steam half-and-half hingga lembut dan sedikit berbusa","Tuang ke atas espresso, aduk ringan"]},
+  {kind:"manual", icon:"🌸", name:"Kopi Klepon", comp:"Kopi + pasta pandan + kelapa parut + gula aren, terinspirasi jajanan klepon", desc:"Kopi kekinian Indonesia yang terinspirasi rasa klepon — pandan harum, kelapa gurih, dan manis gula aren dalam satu gelas.",
+   steps:["Campurkan pasta pandan dengan susu dan gula aren","Tuang kopi pekat di atasnya","Taburi kelapa parut sangrai sebagai sentuhan akhir"]},
+  {kind:"manual", icon:"☕", name:"Cà Phê Sữa Nóng", comp:"Kopi robusta pekat + susu kental manis, disajikan panas (versi hangat dari Cà Phê Sữa Đá)", desc:"Versi hangat dari kopi susu Vietnam, kental dan manis, cocok diminum pelan-pelan sambil menikmati suasana pagi.",
+   steps:["Teteskan kopi robusta pekat lewat phin ke atas susu kental manis","Aduk rata selagi hangat","Sajikan segera tanpa es"]},
+  {kind:"manual", icon:"🥥", name:"Kopi Batok Malang", comp:"Kopi tubruk/robusta disajikan langsung dalam batok (tempurung) kelapa", desc:"Tren dari Malang, Jawa Timur — kopi disajikan dalam batok kelapa asli yang menambah aroma khas dan kesan tradisional.",
+   steps:["Seduh kopi tubruk seperti biasa","Tuang ke dalam batok kelapa yang sudah dibersihkan","Sajikan hangat, nikmati aroma khas dari batoknya"]},
+];
+
+const cafes = [
+  /* JAKARTA */
+  {city:"Jakarta", name:"Giyanti Coffee Roastery", area:"Kemang, Jakarta Selatan", desc:"Salah satu roastery pionir yang ikut membangun fondasi kopi specialty Jakarta, dikenal lewat single origin Nusantara pilihan.", signature:"Single Origin Nusantara"},
+  {city:"Jakarta", name:"Common Grounds", area:"Sudirman, Jakarta Pusat", desc:"Berdiri sejak 2014, jadi salah satu ikon gerakan gelombang ketiga kopi Jakarta dengan program kopi yang matang dan konsisten.", signature:"Filter Coffee & Espresso"},
+  {city:"Jakarta", name:"Tanamera Coffee", area:"SCBD & beberapa cabang, Jakarta Selatan", desc:"Roastery lokal dengan reputasi kuat sejak awal, dikenal lewat pengolahan biji Sumatera dan racikan blend andalannya.", signature:"Sumatera Blend"},
+  {city:"Jakarta", name:"First Crack Coffee", area:"Kebon Sirih, Jakarta Pusat", desc:"Mengusung konsep 'farm to cup', menyajikan menu kreatif seperti kopi campur buah berry dan kombinasi kopi-timun yang menyegarkan.", signature:"Berry Drift"},
+
+  /* BANDUNG */
+  {city:"Bandung", name:"Kopikalyan", area:"Karapitan, Bandung", desc:"Coffee shop legendaris dengan interior kayu hangat dan area outdoor luas, salah satu nama paling dikenal di Bandung.", signature:"Espresso hingga Kopi Spesial"},
+  {city:"Bandung", name:"Jabarano Coffee", area:"Braga & Dago, Bandung", desc:"Konsep gaya Australian coffee shop berbalut budaya Jawa Barat, bangga memakai biji kopi langsung dari petani lokal.", signature:"Ice Kopi Surili"},
+  {city:"Bandung", name:"Kopi Toko Djawa", area:"Bangunan heritage kolonial, Bandung", desc:"Nostalgia arsitektur kolonial Belanda dipadukan resep kopi tradisional dan teknik brewing modern.", signature:"Kopi Tubruk Klasik"},
+  {city:"Bandung", name:"Two Hands Full", area:"Bandung", desc:"Specialty coffee dengan pilihan single origin yang bergilir tiap bulan, konsep open kitchen agar proses seduh terlihat langsung.", signature:"Single Origin Bulanan"},
+
+  /* SEMARANG */
+  {city:"Semarang", name:"Strada Coffee", area:"Gajahmungkur, Semarang", desc:"Specialty coffee dengan roaster sendiri, suasana modern yang nyaman untuk kerja maupun sekadar nongkrong santai.", signature:"House Roasted Beans"},
+  {city:"Semarang", name:"Tekodeko Koffiehuis", area:"Kawasan Kota Lama, Semarang", desc:"Kafe heritage legendaris bernuansa kolonial di jantung Kota Lama Semarang, favorit wisatawan sejarah dan kopi.", signature:"Kopi Kolonial"},
+  {city:"Semarang", name:"Antarakata Coffee", area:"Semarang Tengah", desc:"Spesialis kopi filter dengan metode V60, punya menu Caffe Latte creamy yang jadi favorit pengunjung.", signature:"V60 Filter Coffee"},
+  {city:"Semarang", name:"Kalamaya Koffie", area:"Pusat kota Semarang", desc:"Lini biji kopi yang beragam dengan harga terjangkau, jadi favorit anak muda dan mahasiswa untuk WFC.", signature:"Kopi Filter Harga Ramah"},
+
+  /* YOGYAKARTA */
+  {city:"Yogyakarta", name:"Klinik Kopi", area:"Jl. Kaliurang, Sleman", desc:"Salah satu pionir kopi specialty di Jogja, kopi diseduh dan disajikan langsung dengan pendekatan personal ala 'konsultasi'.", signature:"Seduhan Personal Single Origin"},
+  {city:"Yogyakarta", name:"Legend Coffee", area:"Abu Bakar Ali, Yogyakarta", desc:"Tempat nongkrong wajib di Jogja, suasana santai dengan menu lengkap, sering jadi lokasi nobar dan main board game.", signature:"Menu Lengkap Segala Suasana"},
+  {city:"Yogyakarta", name:"Silol Kopi & Eatery", area:"Suroto, Yogyakarta", desc:"Selalu ramai dengan ribuan ulasan positif, area outdoor luas dengan menu bervariasi dari camilan hingga makanan berat.", signature:"Area Outdoor Luas"},
+  {city:"Yogyakarta", name:"Dasawarsa Coffee Roasters", area:"Poncowinatan, Yogyakarta", desc:"Roastery dengan proses sangrai sendiri yang edukatif, cocok bagi penikmat kopi yang penasaran soal proses di baliknya.", signature:"House Roastery"},
+
+  /* SURABAYA */
+  {city:"Surabaya", name:"Calibre Coffee Roasters", area:"Walikota Mustajab, Surabaya", desc:"Pelopor specialty coffee di Surabaya, melakukan roasting in-house dengan biji lokal maupun internasional pilihan.", signature:"Single Origin Roasted In-House"},
+  {city:"Surabaya", name:"Volks Coffee", area:"MH Thamrin, Surabaya", desc:"Konsep modern yang cozy, banyak digemari anak muda, dikenal lewat nitro coffee dan pilihan manual brew.", signature:"Nitro Coffee"},
+  {city:"Surabaya", name:"Redback Specialty Coffee", area:"Darmo Permai Selatan, Surabaya", desc:"Kualitas konsisten dengan pemandangan lapangan golf dari jendela besar, favorit pecinta kopi serius.", signature:"Flat White"},
+  {city:"Surabaya", name:"Titik Koma Coffee", area:"Juwono, Surabaya", desc:"Mengusung filosofi 'Pause', tempat ideal untuk me-time dengan pilihan metode seduh V60 dan Aeropress.", signature:"V60 & Aeropress"},
+
+  /* ===== KEKINIAN & VIRAL — FAVORIT ANAK MUDA (UPDATE TERBARU) ===== */
+  {city:"Jakarta", name:"Oddity Coffee", area:"Senopati, Jakarta Selatan", desc:"Viral berkat arsitektur brutalist monokromatik dengan struktur beton ekspos abu-abu yang tegas — spot foto favorit Gen Z Jaksel.", signature:"Interior Brutalist Estetik", trending:true},
+  {city:"Jakarta", name:"Social Affair Coffee & Bakehouse", area:"PIK Avenue, Jakarta Utara", desc:"Bagian dari geliat kafe kekinian Pantai Indah Kapuk, memadukan kopi dengan bakery segar dan suasana pinggir laut.", signature:"Kopi & Bakery Pinggir Laut", trending:true},
+  {city:"Jakarta", name:"Kapsul Waktu", area:"Cipete Utara, Jakarta Selatan", desc:"Konsep futuristik dengan kursi berbentuk pod/kapsul individual, jadi favorit anak muda yang cari privasi untuk fokus kerja.", signature:"Pod Seat Futuristik", trending:true},
+
+  {city:"Bandung", name:"Kopi Tuku", area:"Jl. Ambon, Jl. Riau & PVJ, Bandung", desc:"Kedai yang memulai tren 'Es Kopi Susu' nasional, kini jadi brand gaya hidup dengan desain kekinian dan merchandise ramah lingkungan.", signature:"Es Kopi Susu Tetangga", trending:true},
+  {city:"Bandung", name:"Kopi Cantel", area:"Progo & Braga, Bandung", desc:"Desain minimalis modern oranye yang kekinian, unik karena ada perosotan di dalam kafenya — favorit anak muda untuk konten.", signature:"Kopi Susu Cantel", trending:true},
+  {city:"Bandung", name:"Maison De La Sol Coffee and Culture", area:"Bandung", desc:"Suasana ala Meksiko dengan dekorasi kaktus dan lampu kekinian, memadukan kopi berkualitas dengan pengalaman budaya berbeda.", signature:"Kopi Bernuansa Meksiko", trending:true},
+
+  {city:"Semarang", name:"Headroom Coffee", area:"Sisingamangaraja, Kaliwiru, Semarang", desc:"Buka 24 jam dan baru rilis akhir 2025, vibenya cocok buat anak muda yang ingin berekspresi bebas sambil menikmati kopi berkualitas.", signature:"Buka 24 Jam", trending:true},
+  {city:"Semarang", name:"Eastman Coffee House", area:"Ahmad Yani, Semarang Tengah", desc:"Paling sering direkomendasikan anak muda Semarang, interior modern minimalis dengan area luas untuk nongkrong lama.", signature:"Area Luas Nyaman", trending:true},
+  {city:"Semarang", name:"Jaggad Coffee & Co.", area:"Gajahmada, Semarang Tengah", desc:"Vibe paling kekinian di pusat kota, jadi salah satu tujuan utama anak muda Semarang untuk nongkrong hingga malam.", signature:"Vibe Kekinian Pusat Kota", trending:true},
+
+  {city:"Yogyakarta", name:"C28 Social Space", area:"Yogyakarta", desc:"Viral di media sosial berkat visual interior yang sangat instagramable, jadi magnet baru bagi Gen Z Jogja.", signature:"Interior Instagramable", trending:true},
+  {city:"Yogyakarta", name:"Bergamot Koffie", area:"Yogyakarta", desc:"Dikenal sebagai pelopor 'dirty coffee' yang lagi hype — espresso panas dituang di atas susu dingin dengan efek gradasi dramatis.", signature:"Dirty Coffee", trending:true},
+  {city:"Yogyakarta", name:"Noe Coffee & Kitchen", area:"Dr. Wahidin Sudirohusodo, Yogyakarta", desc:"Konsep modern vintage dengan biji kopi daerah yang berganti tiap minggu, dari Curio Enrekang sampai Malabar Pangalengan.", signature:"Single Origin Bergilir", trending:true},
+
+  {city:"Surabaya", name:"Common Ground Central", area:"Tunjungan, Surabaya", desc:"Salah satu tempat nongkrong paling viral di Surabaya saat ini, desain aesthetic yang jadi favorit pemburu konten.", signature:"Spot Konten Aesthetic", trending:true},
+  {city:"Surabaya", name:"Gion Market n Creative Hub", area:"Rungkut, Surabaya", desc:"Area food market kreatif yang viral, berjejer tenant makanan dan minuman kekinian jadi tujuan kumpul anak muda.", signature:"Food Market Kreatif", trending:true},
+  {city:"Surabaya", name:"Coloni Coffee", area:"Surabaya", desc:"Kafe kekinian dengan pilihan pastry lengkap yang pas dinikmati bersama kopi andalan, favorit untuk hangout santai.", signature:"Kopi & Pastry", trending:true},
+
+  /* ===== UPDATE TERBARU — KEKINIAN, MIN. 20 PER KOTA (JABODETABEK & DIY) ===== */
+  /* JAKARTA (meliputi DKI Jakarta, Tangerang Selatan, Depok) */
+  {city:"Jakarta", name:"Atsara Coffee Gandaria", area:"Kebayoran Baru, Jakarta Selatan", desc:"Konsep natural serba kayu berpadu tanaman hijau, suasana hangat untuk quality time maupun nugas.", signature:"Suasana Natural Kayu", trending:true},
+  {city:"Jakarta", name:"Kopitagram Centang Biru", area:"Ampera, Jakarta Selatan", desc:"Desain monokrom elegan dengan area luas, cocok dari sekadar nongkrong sampai meeting kerja.", signature:"Interior Monokrom", trending:true},
+  {city:"Jakarta", name:"Work Coffee", area:"Lebak Bulus, Jakarta Selatan", desc:"Mengusung tema unfinished industrial yang jadi tren baru, area outdoor luas favorit anak muda.", signature:"Tema Unfinished Industrial", trending:true},
+  {city:"Jakarta", name:"Merene", area:"Pejaten, Jakarta Selatan", desc:"Bangunan 3 lantai gaya industrial berpadu kerajinan tradisional, ada rooftop untuk nongkrong sore.", signature:"Rooftop 3 Lantai", trending:true},
+  {city:"Jakarta", name:"Como Park Building", area:"Kemang, Jakarta Selatan", desc:"Area terbuka ramah anjing peliharaan, berjejer tenant kopi dan makanan kekinian dalam satu kawasan.", signature:"Taman Terbuka Ramah Hewan", trending:true},
+  {city:"Jakarta", name:"PikNik by Warpas", area:"Lebak Bulus, Jakarta Selatan", desc:"Vibe piknik ala Bali di tepi kolam renang, cocok nongkrong santai maupun kerja bawa laptop.", signature:"Vibes Piknik Tepi Kolam", trending:true},
+  {city:"Jakarta", name:"Kukira Coffee & Space", area:"Fatmawati, Jakarta Selatan", desc:"Nyaman untuk kerja atau nugas, tersedia area indoor ber-AC dan outdoor yang teduh berkipas.", signature:"Ramah untuk WFC", trending:true},
+  {city:"Jakarta", name:"Happiness Kitchen & Coffee", area:"Jagakarsa, Jakarta Selatan", desc:"Konsep rustic vintage dari furnitur kayu, sudah lama jadi tongkrongan favorit anak muda Jaksel.", signature:"Rustic Vintage", trending:true},
+  {city:"Jakarta", name:"Ren Coffee & Eatery", area:"Tebet, Jakarta Selatan", desc:"Bertema Jepang dengan interior stylish, terkenal lewat menu 'kopi kakek legend'.", signature:"Tema Jepang", trending:true},
+  {city:"Jakarta", name:"Dikolam Cafe", area:"Mampang, Jakarta Selatan", desc:"Nongkrong di samping kolam renang biru jernih, ada floating pool bed untuk spot foto.", signature:"Floating Pool Bed", trending:true},
+  {city:"Jakarta", name:"Tanatap Coffee Ampera", area:"Ampera, Jakarta Selatan", desc:"Oase hijau rindang di tengah kota, jadi ruang kreatif untuk berkumpul dan berkolaborasi.", signature:"Ruang Kreatif Hijau", trending:true},
+  {city:"Jakarta", name:"Shots Coffee Bar", area:"Radio Dalam, Jakarta Selatan", desc:"Tema ala New York dengan area rooftop dan mini patung liberty sebagai ciri khasnya.", signature:"Tema New York", trending:true},
+  {city:"Jakarta", name:"Kopi Nako Alam Sutera", area:"Serpong, Tangerang Selatan", desc:"Bangunan berdinding kaca putih dengan taman hijau luas, favorit anak muda Tangsel untuk WFH.", signature:"Bangunan Kaca Instagramable", trending:true},
+  {city:"Jakarta", name:"MOOI Space", area:"Vanya Park, BSD City, Tangerang Selatan", desc:"Nuansa colorful industrial minimalis dengan pemandangan danau yang segar dan ceria.", signature:"Colorful Industrial", trending:true},
+  {city:"Jakarta", name:"Roemah Coffee, Eatery & Hub", area:"Dekat Stasiun UI, Depok", desc:"Arsitektur bangunan eye-catching, jadi favorit mahasiswa yang naik-turun Stasiun UI.", signature:"Dekat Stasiun UI", trending:true},
+  {city:"Jakarta", name:"Kopi Kotak Margonda", area:"M District, Margonda, Depok", desc:"Spot hangout baru yang super instagramable, dekat area kos favorit mahasiswa UI.", signature:"Spot Baru Margonda", trending:true},
+  {city:"Jakarta", name:"Lucky Cat Coffee & Kitchen", area:"Jakarta Selatan", desc:"Kerap mengadakan event khusus yang dinantikan pelanggan setianya, suasana asyik dan kekinian.", signature:"Sering Ada Event", trending:true},
+
+  /* BANDUNG */
+  {city:"Bandung", name:"Duwatiga", area:"Jl. Dr. Cipto, Bandung", desc:"Tempat luas dan adem, favorit untuk WFC maupun sekadar kumpul bareng teman.", signature:"Luas & Adem", trending:true},
+  {city:"Bandung", name:"Umanari", area:"Bandung", desc:"Nuansa tropical ala Bali dengan tanaman hijau dan furnitur kayu di tiap sudutnya.", signature:"Vibes Tropical Bali", trending:true},
+  {city:"Bandung", name:"Filosofi Kopi Dago Atas", area:"Creative Restart Hotel, Dago Atas, Bandung", desc:"Cabang baru dengan area indoor-outdoor lengkap, cocok untuk ngopi santai maupun WFH.", signature:"Indoor-Outdoor Lengkap", trending:true},
+  {city:"Bandung", name:"Bruriram Cafe", area:"Cikole, Lembang", desc:"Suasana kebun pinus alami dengan HTM gratis, cocok nongkrong panjang sambil WFC di alam terbuka.", signature:"Kebun Pinus Gratis Masuk", trending:true},
+  {city:"Bandung", name:"Cisgar Cafe", area:"Dago, Bandung", desc:"Memadukan garden cafe dan coworking space, area luas dengan big screen untuk gathering.", signature:"Garden Coworking Space", trending:true},
+  {city:"Bandung", name:"Wheels Coffee Roasters", area:"Heritage Lifestyle Hub, Bandung", desc:"Bangunan heritage estetik dengan kopi berkualitas dan racikan yang konsisten.", signature:"Bangunan Heritage", trending:true},
+  {city:"Bandung", name:"Ekara Coffee & Eatery", area:"Hegarmanah, Bandung", desc:"Spot foto instagramable dengan desain interior yang memukau, salah satu yang lagi viral.", signature:"Interior Memukau", trending:true},
+  {city:"Bandung", name:"Monday Coffee Buah Batu", area:"Turangga, Bandung", desc:"Bangunan material full glass block yang eye-catching, cozy dan romantis di malam hari.", signature:"Bangunan Glass Block", trending:true},
+  {city:"Bandung", name:"Kiara Kopi", area:"Buah Batu, Bandung", desc:"Interior kayu hangat dengan menu favorit Es Kopi Susu Gula Aren dan Americano.", signature:"Interior Kayu Hangat", trending:true},
+  {city:"Bandung", name:"Kyomi Space", area:"Dago Bawah, Bandung", desc:"Terinspirasi band Jepang LAMP, desain interior kayu dan lampu temaram bernuansa Jepang autentik.", signature:"Nuansa Jepang Autentik", trending:true},
+  {city:"Bandung", name:"Kopi Selasar (Selasar Sunaryo)", area:"Dago, Bandung", desc:"Kafe di dalam galeri seni, suasana sangat tenang untuk menyesap kopi di bawah pohon besar ikonik.", signature:"Kafe Galeri Seni", trending:true},
+  {city:"Bandung", name:"Kinnokimi Backyard", area:"Buah Batu, Bandung", desc:"Tema taman Jepang lengkap kolam koi, pondok kayu, dan lentera bernuansa festival lampion.", signature:"Taman Jepang & Kolam Koi", trending:true},
+  {city:"Bandung", name:"DE.U Coffee Dago", area:"Dago, Bandung", desc:"Area super luas indoor hingga outdoor, jadi tempat nongkrong favorit 'barudak Bandung'.", signature:"Favorit Anak Muda Dago", trending:true},
+  {city:"Bandung", name:"Tanatap Coffee Heritage Braga", area:"Braga, Bandung", desc:"Bangunan bersejarah direnovasi jadi coffee shop dua lantai bergaya vintage industrial.", signature:"Bangunan Heritage Braga", trending:true},
+  {city:"Bandung", name:"Work Unusual", area:"Buah Batu, Bandung", desc:"Nuansa minimalis ala Jepang dengan meeting room untuk rapat atau diskusi kelompok.", signature:"Ada Meeting Room", trending:true},
+  {city:"Bandung", name:"Yumaju Coffee Buah Batu", area:"Buah Batu, Bandung", desc:"Konsep minimalis dan homey dua lantai, nyaman untuk chill maupun kerja.", signature:"Minimalis & Homey", trending:true},
+  {city:"Bandung", name:"ManA Social Space Buah Batu", area:"Buah Batu, Bandung", desc:"Rumah kedua dari cabang Dago, membawa konsep urban style yang kekinian di tiap sudutnya.", signature:"Urban Style Kekinian", trending:true},
+
+  /* SEMARANG */
+  {city:"Semarang", name:"Cemil Dining", area:"Kawasan Kota Lama, Semarang", desc:"Tersembunyi di dalam hotel estetik dan artsy, menghadirkan pengalaman bersantap yang spesial.", signature:"Tersembunyi di Kota Lama", trending:true},
+  {city:"Semarang", name:"Dharma Boutique Roastery", area:"Wotgandul Barat, Semarang Tengah", desc:"Kopinya diolah dan diracik sendiri sejak 1928, sambil ngopi bisa belajar sejarah kopi lokal.", signature:"Roastery Sejak 1928", trending:true},
+  {city:"Semarang", name:"The Tavern", area:"Gajahmungkur, Semarang", desc:"Nuansa vintage klasik ala tahun 60-an, spot foto instagramable favorit anak muda.", signature:"Nuansa Vintage 60-an", trending:true},
+  {city:"Semarang", name:"Arah Awan Coffee & Bar", area:"Semarang", desc:"Indoor-outdoor dengan pemandangan kota yang menawan, ditemani live music di malam hari.", signature:"View Kota & Live Music", trending:true},
+  {city:"Semarang", name:"Folkafe Setiabudi", area:"Semarang Atas", desc:"Cafeteria kekinian populer di kawasan atas, nyaman untuk bersantai maupun berkumpul.", signature:"Populer di Semarang Atas", trending:true},
+  {city:"Semarang", name:"The Blue Lotus Coffee House & Restaurant", area:"Wonodri, Semarang Selatan", desc:"Konsep nyentrik dan hommy dengan banyak pilihan kopi andalan bercita rasa khas.", signature:"Konsep Nyentrik & Hommy", trending:true},
+  {city:"Semarang", name:"Obsidian Coffee & Eatery", area:"Metro Park View Hotel, Semarang Tengah", desc:"Kopi spesial dengan suasana cozy modern, lokasinya dekat kawasan Kota Lama.", signature:"Dekat Kota Lama", trending:true},
+  {city:"Semarang", name:"Bento Kopi Semarang", area:"Semarang", desc:"Konsep kekinian yang populer dari Jogja, kini hadir di kawasan persawahan asri Semarang.", signature:"Ekspansi dari Jogja", trending:true},
+  {city:"Semarang", name:"Kama Cafe", area:"Semarang", desc:"Konsep industrial minimalis berpadu pepohonan hijau dengan pemandangan danau yang menenangkan.", signature:"View Danau", trending:true},
+  {city:"Semarang", name:"Kopi Konco", area:"Ngaliyan, Semarang Barat", desc:"Favorit mahasiswa UIN Walisongo, desain monokrom bersih dengan Wi-Fi kencang untuk belajar.", signature:"Favorit Mahasiswa", trending:true},
+  {city:"Semarang", name:"Kebon Kencana Plants & Coffee", area:"Bandungan, Kabupaten Semarang", desc:"Konsep natural dengan taman asri penuh tanaman hias yang bikin betah berlama-lama.", signature:"Taman Tanaman Hias", trending:true},
+  {city:"Semarang", name:"Tungkubumi", area:"Jimbaran, Bandungan, Kabupaten Semarang", desc:"Nuansa tradisional Jawa dengan masakan rumahan khas, suasana cafe yang tetap hits.", signature:"Nuansa Tradisional Jawa", trending:true},
+  {city:"Semarang", name:"Kahyangan Terrace", area:"Jetis, Bandungan, Kabupaten Semarang", desc:"Angkringan outdoor dengan panorama Gunung Merbabu dan Danau Rawa Pening yang memukau.", signature:"Panorama Pegunungan", trending:true},
+  {city:"Semarang", name:"Sky Garden Bandungan", area:"Bandungan, Kabupaten Semarang", desc:"Cafe dengan pemandangan ketinggian pegunungan, favorit untuk sunset dan city light malam hari.", signature:"View Ketinggian", trending:true},
+  {city:"Semarang", name:"De Montanaz", area:"Bandungan, Kabupaten Semarang", desc:"Bagian dari rangkaian cafe hits kawasan Bandungan dengan konsep yang terus diperbarui.", signature:"Cafe Hits Bandungan", trending:true},
+  {city:"Semarang", name:"Miss Bee Providore", area:"Semarang", desc:"Bakery-cafe legendaris yang jadi favorit lintas generasi, terkenal lewat aneka rotinya.", signature:"Bakery Legendaris", trending:true},
+  {city:"Semarang", name:"Toko Oen Semarang", area:"Pandanaran, Semarang", desc:"Kedai es krim dan kopi heritage sejak era kolonial, tetap jadi favorit anak muda untuk konten estetik.", signature:"Heritage Sejak Kolonial", trending:true},
+
+  /* YOGYAKARTA (meliputi Kota Yogyakarta, Sleman, Bantul) */
+  {city:"Yogyakarta", name:"Maraville Coffee", area:"Jl. Kaliurang KM.5, Depok, Sleman", desc:"Kafe hits di kawasan Jakal, favorit nongkrong anak muda Jogja maupun wisatawan.", signature:"Hits di Jakal", trending:true},
+  {city:"Yogyakarta", name:"Good Luck Coffee & Space", area:"Jl. Kaliurang KM.7, Sleman", desc:"Interior ala Jepang yang calming, fasilitas superlengkap dari ruang komunal sampai meeting room.", signature:"Fasilitas Superlengkap", trending:true},
+  {city:"Yogyakarta", name:"Northway Coffee and Space", area:"Jl. Kaliurang KM.12, Ngaglik, Sleman", desc:"Buka hingga tengah malam, jadi pilihan favorit untuk nongkrong santai di malam hari.", signature:"Buka Sampai Tengah Malam", trending:true},
+  {city:"Yogyakarta", name:"Agoge Cafe", area:"Sariharjo, Ngaglik, Sleman", desc:"Konsep ramah keluarga lengkap dengan playground anak, favorit mahasiswa dan keluarga muda.", signature:"Ramah Keluarga", trending:true},
+  {city:"Yogyakarta", name:"Rumah Rasa Kaliurang", area:"Hargobinangun, Pakem, Sleman", desc:"Kafe tersembunyi lereng Merapi dengan atmosfer tenang dan desain homey.", signature:"Tersembunyi Lereng Merapi", trending:true},
+  {city:"Yogyakarta", name:"Kopi Klotok Kaliurang", area:"Jl. Kaliurang KM.16, Pakem, Sleman", desc:"Bangunan joglo di tepi sawah, ikon ngopi 'ndeso' Jogja yang selalu ramai wisatawan dan pesepeda.", signature:"Bangunan Joglo Tepi Sawah", trending:true},
+  {city:"Yogyakarta", name:"Bento Kopi Jogja", area:"Prawirotaman, Yogyakarta", desc:"Salah satu tongkrongan baru paling ramai dikunjungi anak muda Jogja.", signature:"Tongkrongan Baru Populer", trending:true},
+  {city:"Yogyakarta", name:"Bawah Langit Jogja", area:"Kaliurang Timur, Ngaglik, Sleman", desc:"Nuansa tropis dengan atap jerami dan panggung live music di tengah cafe.", signature:"Nuansa Tropis & Live Music", trending:true},
+  {city:"Yogyakarta", name:"Couvée Jakal", area:"Depok, Sleman", desc:"Suasana tenang dan instagramable dengan kopi berkualitas dan Wi-Fi kencang.", signature:"Tenang & Wi-Fi Kencang", trending:true},
+  {city:"Yogyakarta", name:"28 Coffee Jakal", area:"Jl. Kaliurang KM.11, Ngaglik, Sleman", desc:"Pilihan kopi klasik hingga kekinian lengkap, favorit nongkrong di sepanjang Jakal.", signature:"Menu Kopi Lengkap", trending:true},
+  {city:"Yogyakarta", name:"LaVana Kaliurang", area:"Hargobinangun, Pakem, Sleman", desc:"Restoran kekinian di kaki Gunung Merapi, dikelilingi banyak pohon pinus yang syahdu.", signature:"Dikelilingi Pohon Pinus", trending:true},
+  {city:"Yogyakarta", name:"Mantra Bumi Coffee & Space", area:"Jl. Parangtritis, Sewon, Bantul", desc:"Interior industrial modern berkapasitas 300 orang, ada live akustik tiap pekan.", signature:"Kapasitas 300 Orang", trending:true},
+  {city:"Yogyakarta", name:"Ndorogiri Cafe & Space", area:"Bantul", desc:"Suasana autentik Jawa lengkap area bermain anak, sering jadi venue acara pernikahan.", signature:"Sering untuk Acara Pernikahan", trending:true},
+  {city:"Yogyakarta", name:"Jiwa Jawi", area:"Banyutemumpang, Bangunjiwo, Bantul", desc:"Petualangan kuliner yang membawa suasana tradisi dan alam dalam satu pengalaman.", signature:"Nuansa Tradisi & Alam", trending:true},
+  {city:"Yogyakarta", name:"Kopi Paris (Shiji Coffee Paris)", area:"Jl. Parangtritis-Panggang, Kretek, Bantul", desc:"Nuansa joglo Jawa yang sejuk, lokasinya hanya ratusan meter dari garis Pantai Parangtritis.", signature:"Dekat Pantai Parangtritis", trending:true},
+  {city:"Yogyakarta", name:"Manhattan Cafe", area:"Tamantirto, Kasihan, Bantul", desc:"Konsep kekinian bernuansa Ibiza yang jadi salah satu kafe baru favorit anak muda Bantul.", signature:"Nuansa Ibiza", trending:true},
+  {city:"Yogyakarta", name:"Omah Luhur Parangtritis", area:"Watu Gajah, Parangtritis, Kretek, Bantul", desc:"Buka 24 jam dengan pemandangan sunset yang memukau dekat kawasan pantai.", signature:"Buka 24 Jam & Sunset", trending:true},
+
+  /* SURABAYA */
+  {city:"Surabaya", name:"The Library Coffee & Pastries", area:"Pakuwon Indah, Surabaya Barat", desc:"Konsep perpustakaan lengkap rak dan koleksi buku, spot foto yang sangat instagenik.", signature:"Konsep Perpustakaan", trending:true},
+  {city:"Surabaya", name:"Monopole", area:"Klampis Ngasem, Sukolilo, Surabaya", desc:"Konsep minimalis modern dengan menu lengkap dan harga yang tetap terjangkau.", signature:"Minimalis Modern", trending:true},
+  {city:"Surabaya", name:"Alecta Koffie", area:"Pucang Sewu, Gubeng, Surabaya", desc:"Nuansa modern, adem, dan luas, favorit untuk nongkrong bareng banyak teman.", signature:"Nuansa Modern & Adem", trending:true},
+  {city:"Surabaya", name:"Grandfather Coffee Shop", area:"Kalasan, Surabaya", desc:"Nuansa vintage hangat dengan furnitur jadul di tiap sudut dan live music di malam tertentu.", signature:"Nuansa Vintage & Live Music", trending:true},
+  {city:"Surabaya", name:"Seniman Coffee", area:"Trunojoyo, Tegalsari, Surabaya", desc:"Ahli kopi dengan produk yang bahkan sudah diekspor ke luar negeri, plus koleksi cake pilihan.", signature:"Kopi Kualitas Ekspor", trending:true},
+  {city:"Surabaya", name:"Matly Bakehouse", area:"Darmo Permai, Dukuhpakis, Surabaya", desc:"Kafe bakery kekinian yang jadi salah satu nama paling ramai dibicarakan belakangan ini.", signature:"Bakery Kekinian", trending:true},
+  {city:"Surabaya", name:"Urban Brews", area:"Surabaya", desc:"Salah satu nama yang jadi buah bibir akhir 2025, desain instagramable dan suasana nyaman.", signature:"Buah Bibir Terbaru", trending:true},
+  {city:"Surabaya", name:"Selasih Eatery", area:"Surabaya", desc:"Favorit baru dengan suasana nyaman dan menu fusion kekinian yang terus jadi perbincangan.", signature:"Menu Fusion Kekinian", trending:true},
+  {city:"Surabaya", name:"Andr Brews Coffee", area:"Telaga Utama, Citraland, Surabaya", desc:"Baru dibuka pertengahan 2025, langsung jadi perbincangan karena tempatnya yang super aesthetic.", signature:"Baru & Super Aesthetic", trending:true},
+  {city:"Surabaya", name:"Koffie Lab", area:"Surabaya", desc:"Cocok buat yang hobi olahraga padel, konsep sport-cafe yang cukup unik di Surabaya.", signature:"Konsep Sport-Cafe", trending:true},
+  {city:"Surabaya", name:"Toko Kopi Harlem 2.0", area:"Embong Malang, Surabaya", desc:"Konsep American-style modern, dilengkapi smoking area ber-AC di lantai dua.", signature:"Konsep American-Style", trending:true},
+  {city:"Surabaya", name:"PSI Coffee & Spiku", area:"Pusat kota Surabaya", desc:"Nuansa modern, adem, dan luas untuk nongkrong bareng teman-teman.", signature:"Lokasi Pusat Kota", trending:true},
+  {city:"Surabaya", name:"Hutan Rooftop", area:"Embong Sawo, Genteng, Surabaya", desc:"Interior hijau asri penuh tanaman rambat, terkenal lewat Es Kopi khas Hutan.", signature:"Interior Hijau Asri", trending:true},
+  {city:"Surabaya", name:"The Harvest Cakes", area:"Surabaya", desc:"Spesialis cake kualitas premium dan chocolate praline, spot yang aesthetic untuk difoto.", signature:"Spesialis Cake Premium", trending:true},
+  {city:"Surabaya", name:"Roti Gembira", area:"Surabaya", desc:"Salah satu nama baru yang jadi favorit di penghujung 2025, desain nyaman dan instagramable.", signature:"Favorit Baru", trending:true},
+  {city:"Surabaya", name:"Pineapple Park", area:"Surabaya", desc:"Konsep taman kekinian dengan live music di malam hari, cocok nongkrong sampai malam.", signature:"Taman & Live Music", trending:true},
+  {city:"Surabaya", name:"Sakura Sip", area:"Surabaya", desc:"Nuansa Jepang-Korea kekinian dengan live music malam hari, favorit pemburu konten.", signature:"Nuansa Jepang-Korea", trending:true},
+
+  /* ===== ROASTERY SPACE — TEMPAT SANGRAI KOPI DI 5 KOTA ===== */
+  {city:"Yogyakarta", name:"Space Roastery 1890", area:"Bangunan heritage, Yogyakarta", desc:"Roastery kekinian yang memanfaatkan bangunan tua dan ruang senthong khas Jawa, jadi kedai kopi modern bersuasana kaya tradisi. Pengunjung bisa lihat langsung proses sangrai biji kopi.", signature:"Konsep Slow Bar & Senthong Heritage", trending:true},
+  {city:"Jakarta", name:"Gerilya Coffee", area:"Fatmawati, Jakarta Selatan", desc:"Roastery bergaya minimalis modern yang 'bergerilya' mencari biji kopi pilihan dari pelosok Indonesia, hanya sajikan kopi baru selesai disangrai.", signature:"Biji Kopi Pilihan Nusantara", trending:true},
+  {city:"Bandung", name:"Kopi Aroma", area:"Banceuy, Bandung", desc:"Roastery legendaris yang sudah berdiri puluhan tahun, mempertahankan proses roasting tradisional dan jadi ikon oleh-oleh biji kopi khas Bandung.", signature:"Roastery Legendaris Puluhan Tahun", trending:true},
+  {city:"Surabaya", name:"TGC Coffee Roastery", area:"Pusat kota Surabaya", desc:"Menyangrai biji kopinya sendiri di Surabaya dengan mesin modern, kedainya bernuansa Jepang dengan pemandangan kota dari ketinggian.", signature:"Nuansa Jepang & View Kota", trending:true},
+];
+
+const tips = [
+  {n:"01", t:"Simpan kedap udara", d:"Gunakan wadah kedap udara, jauh dari cahaya matahari langsung dan sumber panas."},
+  {n:"02", t:"Habiskan dalam 2–4 minggu", d:"Kopi paling enak dinikmati dalam 2–4 minggu setelah tanggal roasting, bukan setelah dibuka."},
+  {n:"03", t:"Giling sesaat sebelum seduh", d:"Bubuk kopi kehilangan aroma dengan cepat — giling secukupnya, sesaat sebelum diseduh."},
+  {n:"04", t:"Jangan simpan di kulkas", d:"Kelembapan kulkas dapat merusak aroma; simpan di suhu ruang dalam wadah tertutup rapat."},
+  {n:"05", t:"Sesuaikan air dengan ketinggian", d:"Air yang terlalu keras/lunak memengaruhi ekstraksi — air minum biasa dengan mineral seimbang paling ideal."},
+  {n:"06", t:"Cicipi tanpa gula dulu", d:"Coba kopi tanpa tambahan untuk mengenali karakter asli sebelum menambahkan gula/susu."},
+];
+
+const glossary = [
+  {t:"Body", d:"Tebal-tipisnya sensasi kopi di mulut, dari ringan seperti teh hingga tebal seperti krim."},
+  {t:"Acidity (Keasaman)", d:"Rasa cerah dan menyegarkan (bukan rasa asam basi) yang memberi 'hidup' pada kopi, terutama pada light roast."},
+  {t:"Aftertaste", d:"Rasa yang tertinggal di lidah setelah kopi ditelan."},
+  {t:"Crema", d:"Lapisan busa keemasan di atas espresso, hasil dari ekstraksi bertekanan tinggi."},
+  {t:"Single Origin", d:"Kopi yang berasal dari satu daerah/kebun spesifik, tanpa dicampur biji dari daerah lain."},
+  {t:"Blend", d:"Campuran biji kopi dari beberapa daerah/jenis untuk mencapai profil rasa tertentu."},
+  {t:"Cupping", d:"Metode standar mencicipi kopi untuk menilai aroma, rasa, dan kualitas secara objektif."},
+  {t:"Green Bean", d:"Biji kopi mentah yang belum disangrai."},
+  {t:"Roastery", d:"Fasilitas atau usaha yang fokus menyangrai biji kopi mentah (green bean) sendiri menjadi biji siap seduh, sering dipadukan dengan kedai untuk mencicipi langsung."},
+  {t:"Slow Bar", d:"Konter khusus di kedai kopi tempat barista menyeduh manual satu per satu sesuai pesanan, biasanya untuk kopi single origin kelas specialty."},
+];
+
+/* ================= HERO STATS ================= */
+document.getElementById('heroStats').innerHTML = `
+  <div class="stat"><b>${coffees.length}+</b><span>Jenis Kopi</span></div>
+  <div class="stat"><b>${Object.keys(brewMethods).length}</b><span>Metode Seduh</span></div>
+  <div class="stat"><b>${drinks.length}</b><span>Menu Minuman</span></div>
+  <div class="stat"><b>${machines.length}</b><span>Alat &amp; Mesin</span></div>
+`;
+
+/* ================= RENDER: COFFEE GRID ================= */
+const grid = document.getElementById('coffeeGrid');
+const emptyState = document.getElementById('emptyState');
+let currentOrigin = 'semua';
+let currentSpecies = 'semua';
+let currentSearch = '';
+
+function acidLabel(n){ return ["Sangat Rendah","Rendah","Sedang","Sedang-Tinggi","Tinggi"][n-1]; }
+
+function drips(n){
+  let h = '<div class="drips">';
+  for(let i=1;i<=5;i++) h += `<span class="drip ${i<=n?'on':''}"></span>`;
+  return h + '</div>';
+}
+
+function brewLabel(key){ return brewMethods[key] ? brewMethods[key].name : key; }
+
+function renderCoffees(){
+  const q = currentSearch.trim().toLowerCase();
+  const filtered = coffees.filter(c=>{
+    const matchOrigin = currentOrigin==='semua' || c.origin===currentOrigin;
+    const matchSpecies = currentSpecies==='semua' || c.species===currentSpecies;
+    const hay = (c.name+' '+c.region+' '+c.notes.join(' ')).toLowerCase();
+    const matchSearch = !q || hay.includes(q);
+    return matchOrigin && matchSpecies && matchSearch;
+  });
+  grid.innerHTML = filtered.map(c=>`
+    <details class="ccard">
+      <summary>
+        <div class="toprow">
+          <div>
+            <h3>${c.name}</h3>
+            <div class="origin">${c.region}</div>
+          </div>
+          <span class="badge ${c.species}">${c.type}</span>
+        </div>
+        <div class="acid-gauge">
+          <span class="lbl">Keasaman: ${acidLabel(c.acid)}</span>
+          ${drips(c.acid)}
+        </div>
+        <div class="notes">${c.notes.map(n=>`<span>${n}</span>`).join('')}</div>
+        <span class="chevron">▾ detail</span>
+      </summary>
+      <div class="cbody">
+        <p style="margin-top:0;">${c.desc}</p>
+        <div class="row"><b>Rekomendasi mesin</b><span>${c.machine}</span></div>
+        <div class="row"><b>Cocok diseduh dengan</b></div>
+        <div class="pillrow">
+          ${c.brew.map(b=>`<a href="#seduh" data-jump="${b}">${brewLabel(b)}</a>`).join('')}
+        </div>
+      </div>
+    </details>
+  `).join('');
+  emptyState.style.display = filtered.length ? 'none' : 'block';
+}
+renderCoffees();
+
+document.getElementById('originSeg').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#originSeg button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentOrigin = btn.dataset.origin;
+  renderCoffees();
+});
+document.getElementById('speciesSeg').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#speciesSeg button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentSpecies = btn.dataset.species;
+  renderCoffees();
+});
+document.getElementById('searchInput').addEventListener('input', e=>{
+  currentSearch = e.target.value;
+  renderCoffees();
+});
+
+/* ================= RENDER: BREW GRID ================= */
+const brewGrid = document.getElementById('brewGrid');
+brewGrid.innerHTML = Object.entries(brewMethods).map(([key,m])=>`
+  <div class="bcard" id="brew-${key}">
+    <h3>${m.name}</h3>
+    <div class="desc">${m.desc}</div>
+    <div class="ratio-big">1 : ${m.mult}</div>
+    <div class="specs">
+      <div><b>Gilingan</b><span>${m.grind}</span></div>
+      <div><b>Suhu air</b><span>${m.temp}</span></div>
+      <div><b>Waktu</b><span>${m.time}</span></div>
+      <div><b>Takaran dasar</b><span>${m.coffee} g kopi</span></div>
+    </div>
+    <div class="calc">
+      <label>Kopi: <span class="mono gramOut">${m.coffee} g</span>
+        <input type="range" min="8" max="40" value="${m.coffee}" data-mult="${m.mult}" class="rangeInput">
+      </label>
+      <div class="out">→ air dibutuhkan: <span class="waterOut">${m.coffee*m.mult}</span> ml</div>
+    </div>
+    <ol class="steps">${m.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+  </div>
+`).join('');
+
+brewGrid.querySelectorAll('.rangeInput').forEach(inp=>{
+  inp.addEventListener('input', e=>{
+    const card = e.target.closest('.bcard');
+    const g = parseInt(e.target.value,10);
+    const mult = parseInt(e.target.dataset.mult,10);
+    card.querySelector('.gramOut').textContent = g + ' g';
+    card.querySelector('.waterOut').textContent = g*mult;
+  });
+});
+
+/* jump from coffee card pills to brew method */
+document.getElementById('coffeeGrid').addEventListener('click', e=>{
+  const a = e.target.closest('a[data-jump]');
+  if(!a) return;
+  e.preventDefault();
+  showPage('seduh');
+  setTimeout(()=>{
+    const el = document.getElementById('brew-'+a.dataset.jump);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+  },120);
+});
+
+/* ================= RENDER: MACHINES ================= */
+document.getElementById('machGrid').innerHTML = machines.map(m=>`
+  <div class="mcard">
+    <span class="icon">${m.icon}</span>
+    <h3>${m.name}</h3>
+    <p>${m.desc}</p>
+    <div>${m.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+  </div>
+`).join('');
+
+/* ================= RENDER: MENU MINUMAN ================= */
+const drinkGrid = document.getElementById('drinkGrid');
+let currentDrinkKind = 'semua';
+function renderDrinks(){
+  const filtered = drinks.filter(d=> currentDrinkKind==='semua' || d.kind===currentDrinkKind);
+  drinkGrid.innerHTML = filtered.map((d,i)=>`
+    <div class="mcard">
+      <span class="icon">${d.icon}</span>
+      <h3>${d.name}</h3>
+      <p class="mono" style="font-size:12px; color:var(--gold-hi); margin-bottom:8px;">${d.comp}</p>
+      <p>${d.desc}</p>
+      <span class="tag ${d.kind==='manual'?'manual':''}">${d.kind==='manual'?'Manual / Tradisional':'Berbasis Mesin'}</span>
+      <div class="actions">
+        <button class="btn-steps" data-idx="${i}" data-kind="${d.kind}">📋 Lihat Langkah</button>
+        <a class="btn-video" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent('cara membuat '+d.name+' kopi')}">🎥 Cari Video</a>
+      </div>
+      <div class="stepbox" id="steps-${d.kind}-${i}">
+        <ol>${d.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      </div>
+    </div>
+  `).join('');
+  drinkGrid.querySelectorAll('.btn-steps').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const box = document.getElementById(`steps-${btn.dataset.kind}-${btn.dataset.idx}`);
+      const isOpen = box.classList.toggle('open');
+      btn.textContent = isOpen ? '📋 Sembunyikan Langkah' : '📋 Lihat Langkah';
+    });
+  });
+}
+renderDrinks();
+document.getElementById('drinkSeg').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#drinkSeg button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentDrinkKind = btn.dataset.kind;
+  renderDrinks();
+});
+
+/* ================= RENDER: KAFE PILIHAN ================= */
+const cafeGrid = document.getElementById('cafeGrid');
+let currentCity = 'Semua';
+let currentCafeFilter = 'semua';
+function renderCafes(){
+  const filtered = cafes.filter(c=>{
+    const matchCity = currentCity==='Semua' || c.city===currentCity;
+    const matchTrend = currentCafeFilter==='semua' || (currentCafeFilter==='trending' && c.trending);
+    return matchCity && matchTrend;
+  });
+  cafeGrid.innerHTML = filtered.map(c=>`
+    <div class="cafecard">
+      <div class="toprow">
+        <h3>${c.name}</h3>
+        <span class="badge">${c.city}</span>
+      </div>
+      <div class="area">📍 ${c.area}</div>
+      <p>${c.desc}</p>
+      <span class="sig">☕ ${c.signature}</span>${c.trending ? '<span class="trend">🔥 Kekinian & Viral</span>' : ''}
+    </div>
+  `).join('');
+}
+renderCafes();
+document.getElementById('citySeg').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#citySeg button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCity = btn.dataset.city;
+  renderCafes();
+});
+document.getElementById('cafeFilterSeg').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#cafeFilterSeg button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCafeFilter = btn.dataset.filter;
+  renderCafes();
+});
+
+/* ================= RENDER: TIPS + GLOSSARY ================= */
+document.getElementById('tipsGrid').innerHTML = tips.map(t=>`
+  <div class="tip"><div class="n">${t.n}</div><h4>${t.t}</h4><p>${t.d}</p></div>
+`).join('');
+
+document.getElementById('glossary').innerHTML = glossary.map(g=>`
+  <details><summary>${g.t}</summary><p>${g.d}</p></details>
+`).join('');
+
+/* ================= HALAMAN UTAMA (MENU TILES) ================= */
+const menuConfig = [
+  {id:'jenis', icon:'🫘', title:'Jenis Kopi', desc:'Arabika, Robusta, Liberika & lainnya dari Nusantara dan dunia.', countFn:()=>coffees.length+' varian'},
+  {id:'seduh', icon:'🧪', title:'Metode Seduh', desc:'Takaran presisi tiap teknik, dari V60 sampai Turkish coffee.', countFn:()=>Object.keys(brewMethods).length+' metode'},
+  {id:'minuman', icon:'🥤', title:'Menu Minuman', desc:'Espresso-based sampai kopi tradisional, lengkap cara buatnya.', countFn:()=>drinks.length+' menu'},
+  {id:'mesin', icon:'⚙️', title:'Mesin Kopi', desc:'Alat yang cocok untuk tiap metode seduh favoritmu.', countFn:()=>machines.length+' alat'},
+  {id:'kafe', icon:'📍', title:'Kafe Pilihan', desc:'Rekomendasi coffee shop di 5 kota besar Indonesia.', countFn:()=>cafes.length+' kafe, 5 kota'},
+  {id:'lainnya', icon:'📖', title:'Lainnya', desc:'Tingkat sangrai, tips penyimpanan, dan istilah kopi.', countFn:()=>'Tips & Glosarium'},
+];
+document.getElementById('menuGrid').innerHTML = menuConfig.map(m=>`
+  <button class="menu-tile" data-target="${m.id}">
+    <span class="menu-tile-icon">${m.icon}</span>
+    <span class="menu-tile-body">
+      <span class="menu-tile-title">${m.title}</span>
+      <span class="menu-tile-desc">${m.desc}</span>
+      <span class="menu-tile-count">${m.countFn()}</span>
+    </span>
+    <span class="menu-tile-arrow">→</span>
+  </button>
+`).join('');
+
+/* ================= NAVIGASI PER HALAMAN ================= */
+function setActiveNav(id){
+  document.querySelectorAll('nav.tabs button, nav.bottom-nav button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.target===id);
+  });
+}
+function showPage(id){
+  document.getElementById('homeScreen').style.display = 'none';
+  document.getElementById('pageView').style.display = 'block';
+  document.querySelectorAll('.section-page').forEach(s=>s.classList.toggle('active', s.id===id));
+  setActiveNav(id);
+  window.scrollTo(0,0);
+}
+function showHome(){
+  document.getElementById('pageView').style.display = 'none';
+  document.getElementById('homeScreen').style.display = 'block';
+  window.scrollTo(0,0);
+}
+document.getElementById('menuGrid').addEventListener('click', e=>{
+  const btn = e.target.closest('.menu-tile'); if(!btn) return;
+  showPage(btn.dataset.target);
+});
+document.querySelectorAll('nav.tabs button, nav.bottom-nav button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    if(btn.dataset.target === 'home'){ showHome(); } else { showPage(btn.dataset.target); }
+  });
+});
+document.getElementById('backHomeBtn').addEventListener('click', showHome);
+</script>
+</body>
+</html>
